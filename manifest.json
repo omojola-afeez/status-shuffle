@@ -1,0 +1,40 @@
+{
+  "name": "Status Shuffle",
+  "short_name": "StatusShuffle",
+  "description": "Witty, romantic & motivational quotes for your social media status.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#c8622a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "social", "entertainment"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Shuffle a Quote",
+      "short_name": "Shuffle",
+      "url": "./index.html#shuffle",
+      "description": "Jump straight to the quote shuffler"
+    },
+    {
+      "name": "Browse Categories",
+      "short_name": "Categories",
+      "url": "./index.html#categories",
+      "description": "Browse quotes by mood"
+    }
+  ]
+}

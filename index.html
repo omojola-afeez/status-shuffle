@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Status Shuffle — Words Worth Sharing</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#c8622a"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="StatusShuffle"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1a1814;
+      --muted: #7a7468;
+      --accent: #c8622a;
+      --accent-light: #f2dfd3;
+      --card: #ffffff;
+      --border: #e5e0d8;
+      --funny: #d4a017;
+      --romantic: #c0627a;
+      --motivational: #4a8c6f;
+      --funny-bg: #fdf6e3;
+      --romantic-bg: #fdf0f3;
+      --motivational-bg: #eef6f2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      background: var(--ink);
+      color: var(--bg) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 6rem 4rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.8rem;
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,98,42,0.3); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      padding: 0.75rem 1.8rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+
+    /* Hero floating card */
+    .hero-visual {
+      position: relative;
+      height: 340px;
+    }
+    .float-card {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+      max-width: 280px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-card:nth-child(1) { top: 0; left: 10%; animation-delay: 0s; }
+    .float-card:nth-child(2) { top: 110px; left: 40%; animation-delay: -2s; }
+    .float-card:nth-child(3) { bottom: 0; left: 5%; animation-delay: -4s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-card .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .float-card blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .tag-funny { color: var(--funny); }
+    .tag-romantic { color: var(--romantic); }
+    .tag-motivation { color: var(--motivational); }
+
+    /* ── STATS STRIP ── */
+    .stats {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 1.8rem 4rem;
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-label { font-size: 0.8rem; color: #a09890; margin-top: 0.2rem; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* ── CATEGORIES ── */
+    .section { padding: 5rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      letter-spacing: -0.02em;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .category-card {
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
+    .category-card.funny { background: var(--funny-bg); }
+    .category-card.romantic { background: var(--romantic-bg); }
+    .category-card.motivational { background: var(--motivational-bg); }
+    .cat-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .cat-count { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .cat-preview {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--ink);
+      font-style: italic;
+      border-left: 3px solid;
+      padding-left: 0.8rem;
+    }
+    .funny .cat-preview { border-color: var(--funny); }
+    .romantic .cat-preview { border-color: var(--romantic); }
+    .motivational .cat-preview { border-color: var(--motivational); }
+
+    /* ── QUOTE SHUFFLE ── */
+    .shuffle-section {
+      background: var(--ink);
+      padding: 5rem 4rem;
+      text-align: center;
+    }
+    .shuffle-section .section-eyebrow { color: var(--accent); }
+    .shuffle-section .section-title { color: var(--bg); margin-bottom: 0.5rem; }
+    .shuffle-subtitle { color: #a09890; margin-bottom: 3rem; font-size: 0.95rem; }
+
+    .quote-display {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      position: relative;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--accent);
+      line-height: 0.5;
+      opacity: 0.4;
+      position: absolute;
+      top: 1.5rem;
+      left: 2rem;
+    }
+    #shuffled-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--bg);
+      font-style: italic;
+      line-height: 1.5;
+      transition: opacity 0.3s;
+    }
+    #quote-category {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .shuffle-controls { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .filter-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: #a09890;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-shuffle {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 2.2rem;
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-shuffle:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,98,42,0.4); }
+    .copy-btn {
+      background: rgba(255,255,255,0.08);
+      color: #ccc;
+      padding: 0.85rem 1.6rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+    /* ── POPULAR ── */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .quote-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .quote-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .quote-card-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.7rem;
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+    }
+    .quote-card-tag.funny { background: var(--funny-bg); color: var(--funny); }
+    .quote-card-tag.romantic { background: var(--romantic-bg); color: var(--romantic); }
+    .quote-card-tag.motivational { background: var(--motivational-bg); color: var(--motivational); }
+    .quote-card-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .quote-card-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.7rem;
+    }
+    .icon-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .icon-btn:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--accent-light);
+      border-top: 1px solid #e8d2c4;
+      border-bottom: 1px solid #e8d2c4;
+      padding: 4rem;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
+    }
+    .cta-banner p { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── TOPICS TAG CLOUD ── */
+    .topics-section {
+      padding: 4rem;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .topics-section .section-eyebrow { margin-bottom: 0.4rem; }
+    .topics-section .section-title { margin-bottom: 1.5rem; }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .topic-tag {
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+      font-weight: 400;
+    }
+    .topic-tag:hover, .topic-tag.active {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+    .topic-tag.size-lg { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+    .topic-tag.size-md { font-size: 0.92rem; font-weight: 500; color: #444; }
+
+    /* ── PWA INSTALL BANNER ── */
+    .install-banner {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 16px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      z-index: 999;
+      align-items: center;
+      gap: 1rem;
+      max-width: 420px;
+      width: calc(100% - 3rem);
+      animation: slideUp 0.4s ease;
+    }
+    .install-banner.visible { display: flex; }
+    @keyframes slideUp {
+      from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+      to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
+    }
+    .install-banner-icon { font-size: 2rem; flex-shrink: 0; }
+    .install-banner-text { flex: 1; }
+    .install-banner-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .install-banner-text span { font-size: 0.8rem; color: #a09890; }
+    .install-banner-btns { display: flex; gap: 0.5rem; flex-shrink: 0; }
+    .btn-install {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      padding: 0.5rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-dismiss {
+      background: transparent;
+      color: #a09890;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 0.5rem 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--ink);
+      color: var(--bg);
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      transition: transform 0.3s;
+      z-index: 999;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-visual { display: none; }
+      .section { padding: 3rem 1.5rem; }
+      .categories-grid { grid-template-columns: 1fr 1fr !important; }
+      .stats { gap: 2rem; padding: 1.5rem; flex-wrap: wrap; }
+      .shuffle-section { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Status<span>Shuffle</span></div>
+  <ul class="nav-links">
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#shuffle">Shuffle</a></li>
+    <li><a href="#popular">Popular</a></li>
+    <li><a href="#shuffle" class="nav-cta">Try It Free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Words that make your status <em>unforgettable.</em></h1>
+    <p>Witty, romantic, or motivational — find the perfect quote for your social media in seconds. Updated daily. Always fresh.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">Shuffle a Quote ✦</button>
+      <button class="btn-ghost" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Browse Categories</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="float-card">
+      <div class="tag tag-funny">😂 Funny</div>
+      <blockquote>"I'm not arguing, I'm merely explaining why I'm right."</blockquote>
+    </div>
+    <div class="float-card">
+      <div class="tag tag-romantic">💕 Romantic</div>
+      <blockquote>"Every love story is beautiful, but ours is my favorite."</blockquote>
+    </div>
+    <div class="float-card">
+      <div class="tag tag-motivation">⚡ Motivational</div>
+      <blockquote>"Great things never come from comfort zones."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Unique Quotes</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Core Categories</div></div>
+  <div class="stat"><div class="stat-num">Daily</div><div class="stat-label">Fresh Additions</div></div>
+  <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Combinations</div></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="section-header">
+    <p class="section-eyebrow">Browse by Mood</p>
+    <h2 class="section-title">Find your vibe</h2>
+  </div>
+  <div class="categories-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="category-card funny" onclick="setFilter('funny'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">😂</div>
+      <div class="cat-title">Funny & Witty</div>
+      <div class="cat-count">20+ quotes</div>
+      <div class="cat-preview">"My bed is always extra comfortable in the morning when it's time to get up."</div>
+    </div>
+    <div class="category-card romantic" onclick="setFilter('romantic'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">💕</div>
+      <div class="cat-title">Romantic & Cute</div>
+      <div class="cat-count">20+ quotes</div>
+      <div class="cat-preview">"Be the reason someone believes in good people."</div>
+    </div>
+    <div class="category-card motivational" onclick="setFilter('motivational'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">⚡</div>
+      <div class="cat-title">Motivational</div>
+      <div class="cat-count">20+ quotes</div>
+      <div class="cat-preview">"Keep calm & just chill. You've got this."</div>
+    </div>
+    <div class="category-card" style="background:#f0f3ff;" onclick="setFilter('attitude'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">😎</div>
+      <div class="cat-title">Attitude</div>
+      <div class="cat-count">15+ quotes</div>
+      <div class="cat-preview" style="border-color:#5c6bc0;">"Know your worth. Then add tax."</div>
+    </div>
+    <div class="category-card" style="background:#f3fff0;" onclick="setFilter('friendship'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">🤝</div>
+      <div class="cat-title">Friendship</div>
+      <div class="cat-count">15+ quotes</div>
+      <div class="cat-preview" style="border-color:#43a047;">"Friends are the family we choose for ourselves."</div>
+    </div>
+    <div class="category-card" style="background:#f5fff8;" onclick="setFilter('life'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">🌿</div>
+      <div class="cat-title">Life</div>
+      <div class="cat-count">15+ quotes</div>
+      <div class="cat-preview" style="border-color:#26a69a;">"Collect moments, not things."</div>
+    </div>
+    <div class="category-card" style="background:#fff5f0;" onclick="setFilter('angry'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">🔥</div>
+      <div class="cat-title">Angry</div>
+      <div class="cat-count">12+ quotes</div>
+      <div class="cat-preview" style="border-color:#ef5350;">"My patience has limits. Tread carefully."</div>
+    </div>
+    <div class="category-card" style="background:#fdf5ff;" onclick="setFilter('crazy'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
+      <div class="cat-icon">🤪</div>
+      <div class="cat-title">Crazy & Random</div>
+      <div class="cat-count">12+ quotes</div>
+      <div class="cat-preview" style="border-color:#ab47bc;">"I'm not weird. Weird is a side effect of being awesome."</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHUFFLE -->
+<section class="shuffle-section" id="shuffle">
+  <p class="section-eyebrow">✦ Interactive</p>
+  <h2 class="section-title" style="color:var(--bg);margin-bottom:0.5rem">Your Quote, Your Way</h2>
+  <p class="shuffle-subtitle">Pick a mood and hit shuffle until you find the one.</p>
+
+  <div class="shuffle-controls">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="funny" onclick="setFilter('funny')">😂 Funny</button>
+    <button class="filter-btn" data-filter="romantic" onclick="setFilter('romantic')">💕 Romantic</button>
+    <button class="filter-btn" data-filter="motivational" onclick="setFilter('motivational')">⚡ Motivational</button>
+    <button class="filter-btn" data-filter="attitude" onclick="setFilter('attitude')">😎 Attitude</button>
+    <button class="filter-btn" data-filter="friendship" onclick="setFilter('friendship')">🤝 Friendship</button>
+    <button class="filter-btn" data-filter="life" onclick="setFilter('life')">🌿 Life</button>
+    <button class="filter-btn" data-filter="angry" onclick="setFilter('angry')">🔥 Angry</button>
+    <button class="filter-btn" data-filter="crazy" onclick="setFilter('crazy')">🤪 Crazy</button>
+  </div>
+
+  <div class="quote-display">
+    <div class="quote-mark">"</div>
+    <div id="shuffled-quote">Hit shuffle and discover your next perfect status update.</div>
+    <div id="quote-category"></div>
+  </div>
+
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <button class="btn-shuffle" onclick="shuffleQuote()">⟳ &nbsp;Shuffle</button>
+    <button class="copy-btn" onclick="copyQuote()">Copy to clipboard</button>
+  </div>
+</section>
+
+<!-- TOPICS TAG CLOUD -->
+<div class="topics-section" id="topics">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-eyebrow">Browse by Topic</p>
+    <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:1.8rem;letter-spacing:-0.02em;">Top Topics</h2>
+    <div class="tag-cloud" id="tag-cloud"></div>
+  </div>
+</div>
+
+<!-- POPULAR -->
+<section class="section" id="popular">
+  <div class="section-header">
+    <p class="section-eyebrow">Fan Favorites</p>
+    <h2 class="section-title">Most loved quotes</h2>
+  </div>
+  <div class="quotes-grid" id="quotes-grid"></div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2>Never run out of things to say.</h2>
+  <p>New quotes added every day. Bookmark this page and always have the perfect status ready.</p>
+  <button class="btn-primary" onclick="document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">Start Shuffling ✦</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="font-size:1.1rem;">Status<span style="color:var(--accent)">Shuffle</span></div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+  <div>© 2025 StatusShuffle. All rights reserved.</div>
+</footer>
+
+<!-- PWA INSTALL BANNER -->
+<div class="install-banner" id="install-banner">
+  <div class="install-banner-icon">✦</div>
+  <div class="install-banner-text">
+    <strong>Add to Home Screen</strong>
+    <span>Install Status Shuffle as an app — free & works offline.</span>
+  </div>
+  <div class="install-banner-btns">
+    <button class="btn-install" id="btn-install">Install</button>
+    <button class="btn-dismiss" id="btn-dismiss">✕</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard! ✓</div>
+
+<script>
+  const quotes = [
+    // FUNNY
+    { text: "I'm not arguing, I'm merely trying to explain why I'm right.", cat: "funny", tags: ["humor","attitude"] },
+    { text: "My bed is always extra comfortable in the morning when it's time to get up.", cat: "funny", tags: ["humor","life","bedtime"] },
+    { text: "Life has no remote — get up and change it yourself.", cat: "funny", tags: ["humor","life"] },
+    { text: "I need 6 months of vacation, twice a year.", cat: "funny", tags: ["humor","life"] },
+    { text: "I'm on a seafood diet. I see food, I eat it.", cat: "funny", tags: ["humor","food"] },
+    { text: "Behind every great person is a substantial amount of coffee.", cat: "funny", tags: ["humor","coffee"] },
+    { text: "Common sense is like deodorant — those who need it most never use it.", cat: "funny", tags: ["humor","sarcasm"] },
+    { text: "I put the 'pro' in procrastination.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "My brain has too many tabs open.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "I run on coffee, sarcasm, and inappropriate thoughts.", cat: "funny", tags: ["humor","coffee","sarcasm"] },
+    { text: "I was going to take over the world this morning but I overslept.", cat: "funny", tags: ["humor","bedtime"] },
+    { text: "Technically, the floor is always available as extra seating.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "Diet tip: If you eat while standing, the calories fall straight to your feet and walk away.", cat: "funny", tags: ["humor","food"] },
+    { text: "I'm not lazy. I'm in energy-saving mode.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "I speak fluent sarcasm.", cat: "funny", tags: ["humor","sarcasm","attitude"] },
+    { text: "Friday is my second favorite F word.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "I followed my heart and it led me to the fridge.", cat: "funny", tags: ["humor","food"] },
+    { text: "My wallet is like an onion — when I open it, it makes me cry.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "Exercise? I thought you said extra fries.", cat: "funny", tags: ["humor","food"] },
+    { text: "I am not weird. I am a limited edition.", cat: "funny", tags: ["humor","crazy","attitude"] },
+
+    // ROMANTIC
+    { text: "Every love story is beautiful, but ours is my favorite.", cat: "romantic", tags: ["love","cute"] },
+    { text: "Be the reason someone believes in good people.", cat: "romantic", tags: ["love","inspiration"] },
+    { text: "You are my today and all of my tomorrows.", cat: "romantic", tags: ["love","cute"] },
+    { text: "In a sea of people, my eyes will always search for you.", cat: "romantic", tags: ["love","cute"] },
+    { text: "You make ordinary moments feel extraordinary.", cat: "romantic", tags: ["love","cute"] },
+    { text: "My favorite place is inside your hug.", cat: "romantic", tags: ["love","cute"] },
+    { text: "You had me at hello, and you have me forever.", cat: "romantic", tags: ["love","cute"] },
+    { text: "I choose you. And I'll choose you over and over.", cat: "romantic", tags: ["love","cute"] },
+    { text: "You are the Sunday to my Monday.", cat: "romantic", tags: ["love","cute"] },
+    { text: "If you were a vegetable, you'd be a cute-cumber.", cat: "romantic", tags: ["love","humor","cute"] },
+    { text: "Distance means nothing when someone means everything.", cat: "romantic", tags: ["love","cute","long-distance"] },
+    { text: "You make my heart smile.", cat: "romantic", tags: ["love","cute"] },
+    { text: "I want to be your last everything.", cat: "romantic", tags: ["love"] },
+    { text: "You're the reason I look down at my phone and smile.", cat: "romantic", tags: ["love","cute"] },
+    { text: "Falling for you was the best mistake I ever made.", cat: "romantic", tags: ["love"] },
+    { text: "You're my favorite notification.", cat: "romantic", tags: ["love","cute"] },
+    { text: "I never believed in love at first sight — until I saw you.", cat: "romantic", tags: ["love"] },
+    { text: "Home is wherever I'm with you.", cat: "romantic", tags: ["love","cute"] },
+    { text: "You are the poem I never knew how to write.", cat: "romantic", tags: ["love"] },
+    { text: "Every moment spent with you is a moment I treasure forever.", cat: "romantic", tags: ["love","cute"] },
+
+    // MOTIVATIONAL
+    { text: "Great things never come from comfort zones.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Keep calm & just chill. You've got this.", cat: "motivational", tags: ["motivation","calm"] },
+    { text: "Work hard in silence. Let success be your noise.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Don't stop until you're proud.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Be yourself — everyone else is already taken.", cat: "motivational", tags: ["motivation","attitude"] },
+    { text: "One day or day one. You decide.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "The only limit is your mind.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Start where you are. Use what you have. Do what you can.", cat: "motivational", tags: ["motivation"] },
+    { text: "Push yourself, because no one else is going to do it for you.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Dream it. Believe it. Build it.", cat: "motivational", tags: ["motivation","dreams","success"] },
+    { text: "You are stronger than you think.", cat: "motivational", tags: ["motivation","strength"] },
+    { text: "Fall seven times, stand up eight.", cat: "motivational", tags: ["motivation","strength"] },
+    { text: "Your only competition is who you were yesterday.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Everything you've ever wanted is on the other side of fear.", cat: "motivational", tags: ["motivation","courage"] },
+    { text: "Wake up with determination. Go to bed with satisfaction.", cat: "motivational", tags: ["motivation","success","bedtime"] },
+    { text: "Make today so awesome that yesterday gets jealous.", cat: "motivational", tags: ["motivation"] },
+    { text: "A goal without a plan is just a wish.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Difficult roads often lead to beautiful destinations.", cat: "motivational", tags: ["motivation","life"] },
+    { text: "Little by little, a little becomes a lot.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "You didn't come this far to only come this far.", cat: "motivational", tags: ["motivation","success"] },
+
+    // ATTITUDE
+    { text: "I don't have an attitude problem. You have a perception problem.", cat: "attitude", tags: ["attitude","sarcasm"] },
+    { text: "I'm not here to be average. I'm here to be awesome.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "My attitude is a result of your actions.", cat: "attitude", tags: ["attitude"] },
+    { text: "Too glam to give a damn.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "I don't chase anyone. I attract what I deserve.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "Silence is the best response to a fool.", cat: "attitude", tags: ["attitude"] },
+    { text: "Know your worth. Then add tax.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "I'm not for everyone, and I'm okay with that.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "I'm the type of person who falls and comes back stronger.", cat: "attitude", tags: ["attitude","strength"] },
+    { text: "Be a voice, not an echo.", cat: "attitude", tags: ["attitude","motivation"] },
+    { text: "I didn't come this far to only come this far.", cat: "attitude", tags: ["attitude","motivation"] },
+    { text: "Don't mistake my kindness for weakness.", cat: "attitude", tags: ["attitude"] },
+    { text: "I walk like I pay rent everywhere I go.", cat: "attitude", tags: ["attitude","confidence","humor"] },
+    { text: "My vibe speaks louder than my words.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "Level up and leave them wondering.", cat: "attitude", tags: ["attitude","confidence"] },
+
+    // FRIENDSHIP
+    { text: "Good friends are like stars — you don't always see them but you know they're there.", cat: "friendship", tags: ["friendship","cute"] },
+    { text: "A real friend is one who walks in when the rest of the world walks out.", cat: "friendship", tags: ["friendship"] },
+    { text: "Friends buy you food. Best friends eat your food.", cat: "friendship", tags: ["friendship","humor","food"] },
+    { text: "Life was made for good friends and great adventures.", cat: "friendship", tags: ["friendship","adventure"] },
+    { text: "True friends are never apart — maybe in distance, but never in heart.", cat: "friendship", tags: ["friendship","cute"] },
+    { text: "We'll be the old ladies causing trouble in the nursing home.", cat: "friendship", tags: ["friendship","humor","crazy"] },
+    { text: "A friend is someone who knows all about you and still loves you.", cat: "friendship", tags: ["friendship","love"] },
+    { text: "Friendship is born at the moment one person says to another: 'What? You too?'", cat: "friendship", tags: ["friendship"] },
+    { text: "My best friend is the one who brings out the best in me.", cat: "friendship", tags: ["friendship"] },
+    { text: "Side by side or miles apart, real friends are always close to your heart.", cat: "friendship", tags: ["friendship","cute"] },
+    { text: "We go together like coffee and mornings.", cat: "friendship", tags: ["friendship","cute","coffee"] },
+    { text: "You don't have to be crazy to be my friend, but it sure helps.", cat: "friendship", tags: ["friendship","humor","crazy"] },
+    { text: "Friends are the family we choose for ourselves.", cat: "friendship", tags: ["friendship","family"] },
+    { text: "Friendship isn't about who you've known the longest — it's about who walked in and stayed.", cat: "friendship", tags: ["friendship"] },
+    { text: "A day without a friend is like a pot without a single drop of honey left inside.", cat: "friendship", tags: ["friendship","cute"] },
+
+    // LIFE
+    { text: "Life is short. Smile while you still have teeth.", cat: "life", tags: ["life","humor"] },
+    { text: "Not all those who wander are lost.", cat: "life", tags: ["life","adventure"] },
+    { text: "Life is what happens while you're busy making other plans.", cat: "life", tags: ["life"] },
+    { text: "The best view comes after the hardest climb.", cat: "life", tags: ["life","motivation","adventure"] },
+    { text: "Collect moments, not things.", cat: "life", tags: ["life","adventure"] },
+    { text: "In the end, it's not the years in your life that count — it's the life in your years.", cat: "life", tags: ["life"] },
+    { text: "You only live once, but if you do it right, once is enough.", cat: "life", tags: ["life"] },
+    { text: "Life is either a daring adventure or nothing at all.", cat: "life", tags: ["life","adventure"] },
+    { text: "Do more things that make you forget to check your phone.", cat: "life", tags: ["life","happiness"] },
+    { text: "The purpose of life is to live it, taste experience to the utmost.", cat: "life", tags: ["life"] },
+    { text: "Life is tough, my darling, but so are you.", cat: "life", tags: ["life","strength"] },
+    { text: "Just when the caterpillar thought the world was ending, it became a butterfly.", cat: "life", tags: ["life","motivation"] },
+    { text: "Be happy. It drives people crazy.", cat: "life", tags: ["life","humor","attitude"] },
+    { text: "You can't go back and change the beginning, but you can start where you are and change the ending.", cat: "life", tags: ["life","motivation"] },
+    { text: "Life is a journey, not a destination.", cat: "life", tags: ["life","adventure"] },
+
+    // ANGRY
+    { text: "I'm not angry. I'm just passionately expressing my disappointment.", cat: "angry", tags: ["angry","humor","sarcasm"] },
+    { text: "Never go to bed angry — stay up and plot your revenge.", cat: "angry", tags: ["angry","humor","bedtime"] },
+    { text: "I'm smiling. That alone should scare you.", cat: "angry", tags: ["angry","attitude","humor"] },
+    { text: "My patience has limits. Tread carefully.", cat: "angry", tags: ["angry","attitude"] },
+    { text: "I'm allergic to stupidity. I break out in sarcasm.", cat: "angry", tags: ["angry","sarcasm","humor"] },
+    { text: "Don't push me to the point where I stop caring.", cat: "angry", tags: ["angry","attitude"] },
+    { text: "Anger is one letter short of danger.", cat: "angry", tags: ["angry"] },
+    { text: "Keep calm and pretend it's not bothering you.", cat: "angry", tags: ["angry","attitude"] },
+    { text: "When you're annoyed, look at a baby goat. You're welcome.", cat: "angry", tags: ["angry","humor"] },
+    { text: "I don't get mad. I get even.", cat: "angry", tags: ["angry","attitude"] },
+    { text: "Some people should come with a warning label.", cat: "angry", tags: ["angry","humor","sarcasm"] },
+    { text: "My alone time is sometimes for your safety.", cat: "angry", tags: ["angry","humor"] },
+
+    // CRAZY
+    { text: "Normal is boring. I prefer to be extraordinary.", cat: "crazy", tags: ["crazy","humor","attitude"] },
+    { text: "I'm not crazy — my reality is just different from yours.", cat: "crazy", tags: ["crazy","humor"] },
+    { text: "They say I act like I don't care. It's not an act.", cat: "crazy", tags: ["crazy","attitude"] },
+    { text: "I'm on that new diet where you eat everything and pray for a miracle.", cat: "crazy", tags: ["crazy","humor","food"] },
+    { text: "I don't need a hairstylist — my pillow gives me a new style every morning.", cat: "crazy", tags: ["crazy","humor","bedtime"] },
+    { text: "I'm not clumsy — the floor just hates me.", cat: "crazy", tags: ["crazy","humor"] },
+    { text: "My life is a romantic comedy minus the romance and just the comedy.", cat: "crazy", tags: ["crazy","humor"] },
+    { text: "I'm not weird. Weird is a side effect of being awesome.", cat: "crazy", tags: ["crazy","humor","attitude"] },
+    { text: "I do a thing called 'what I want'.", cat: "crazy", tags: ["crazy","attitude"] },
+    { text: "I have multiple personalities and none of them like you.", cat: "crazy", tags: ["crazy","humor","sarcasm"] },
+    { text: "I'm an acquired taste. If you don't like me, acquire some taste.", cat: "crazy", tags: ["crazy","attitude","humor"] },
+    { text: "I may be crazy, but crazy is better than boring.", cat: "crazy", tags: ["crazy","humor"] },
+  ];
+
+  // All unique tags
+  const allTags = [...new Set(quotes.flatMap(q => q.tags || []))].sort();
+  const tagSizes = {};
+  allTags.forEach(t => {
+    tagSizes[t] = quotes.filter(q => (q.tags||[]).includes(t)).length;
+  });
+  const maxSize = Math.max(...Object.values(tagSizes));
+
+  // Build tag cloud
+  const tagCloud = document.getElementById('tag-cloud');
+  let activeTag = null;
+  allTags.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'topic-tag' + (tagSizes[tag] >= maxSize * 0.6 ? ' size-lg' : tagSizes[tag] >= maxSize * 0.35 ? ' size-md' : '');
+    btn.textContent = tag;
+    btn.onclick = () => {
+      activeTag = activeTag === tag ? null : tag;
+      document.querySelectorAll('.topic-tag').forEach(b => b.classList.remove('active'));
+      if (activeTag) btn.classList.add('active');
+      buildPopularGrid();
+    };
+    tagCloud.appendChild(btn);
+  });
+
+  let activeFilter = 'all';
+
+  function setFilter(f) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === f);
+    });
+    shuffleQuote();
+  }
+
+  function getPool() {
+    return activeFilter === 'all' ? quotes : quotes.filter(q => q.cat === activeFilter);
+  }
+
+  let lastIdx = -1;
+  function shuffleQuote() {
+    const pool = getPool();
+    let idx;
+    do { idx = Math.floor(Math.random() * pool.length); } while (idx === lastIdx && pool.length > 1);
+    lastIdx = idx;
+    const q = pool[idx];
+    const el = document.getElementById('shuffled-quote');
+    el.style.opacity = 0;
+    setTimeout(() => {
+      el.textContent = q.text;
+      document.getElementById('quote-category').textContent = q.cat.charAt(0).toUpperCase() + q.cat.slice(1);
+      el.style.opacity = 1;
+    }, 200);
+  }
+
+  function copyQuote() {
+    const text = document.getElementById('shuffled-quote').textContent;
+    navigator.clipboard.writeText('"' + text + '"').then(() => showToast());
+  }
+
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  const labels = {
+    funny:'😂 Funny', romantic:'💕 Romantic', motivational:'⚡ Motivational',
+    attitude:'😎 Attitude', friendship:'🤝 Friendship', life:'🌿 Life',
+    angry:'🔥 Angry', crazy:'🤪 Crazy'
+  };
+
+  function buildPopularGrid() {
+    const pool = activeTag
+      ? quotes.filter(q => (q.tags||[]).includes(activeTag))
+      : quotes.filter(q => ['funny','romantic','motivational','attitude','friendship','life','angry','crazy']
+          .map((c,i) => quotes.filter(x => x.cat===c)[i % quotes.filter(x=>x.cat===c).length])
+        ).slice(0,12);
+
+    // Pick diverse sample if no tag filter
+    let display = activeTag ? pool.slice(0,12) : getDiverseSample(12);
+
+    const grid = document.getElementById('quotes-grid');
+    grid.innerHTML = '';
+    display.forEach(q => {
+      if (!q) return;
+      const safe = q.text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      grid.innerHTML += `
+        <div class="quote-card">
+          <span class="quote-card-tag ${q.cat}">${labels[q.cat] || q.cat}</span>
+          <div class="quote-card-text">"${q.text}"</div>
+          <div class="quote-card-actions">
+            <button class="icon-btn" onclick="copyText('${safe}')">📋 Copy</button>
+            <button class="icon-btn">♡ Save</button>
+          </div>
+        </div>`;
+    });
+  }
+
+  function getDiverseSample(n) {
+    const cats = ['funny','romantic','motivational','attitude','friendship','life','angry','crazy'];
+    const result = [];
+    const usedIdx = {};
+    cats.forEach(c => usedIdx[c] = []);
+    for (let i = 0; i < n; i++) {
+      const cat = cats[i % cats.length];
+      const pool = quotes.filter(q => q.cat === cat);
+      let idx;
+      do { idx = Math.floor(Math.random() * pool.length); } while (usedIdx[cat].includes(idx) && usedIdx[cat].length < pool.length);
+      usedIdx[cat].push(idx);
+      result.push(pool[idx]);
+    }
+    return result;
+  }
+
+  function copyText(text) {
+    navigator.clipboard.writeText('"' + text + '"').then(() => showToast());
+  }
+
+  buildPopularGrid();
+  shuffleQuote();
+
+  // ── PWA: Service Worker ──
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
+  // ── PWA: Install Prompt ──
+  let deferredPrompt = null;
+  const banner = document.getElementById('install-banner');
+  const btnInstall = document.getElementById('btn-install');
+  const btnDismiss = document.getElementById('btn-dismiss');
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => banner.classList.add('visible'), 3000);
+  });
+
+  btnInstall.addEventListener('click', async () => {
+    banner.classList.remove('visible');
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    }
+  });
+
+  btnDismiss.addEventListener('click', () => {
+    banner.classList.remove('visible');
+    deferredPrompt = null;
+  });
+
+  // Hide banner if already installed
+  window.addEventListener('appinstalled', () => {
+    banner.classList.remove('visible');
+  });
+</script>
+</body>
+</html>
