@@ -393,6 +393,56 @@
     }
     .icon-btn:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
 
+    /* ── SHARE BUTTONS ── */
+    .share-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .share-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .share-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s, opacity 0.18s;
+      color: #fff;
+    }
+    .share-btn svg { width: 18px; height: 18px; }
+    .share-btn:hover { transform: scale(1.12); opacity: 0.9; }
+    .share-whatsapp { background: #25D366; }
+    .share-twitter  { background: #000; }
+    .share-facebook { background: #1877F2; }
+    .share-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .share-tiktok   { background: #010101; }
+
+    /* Small share buttons inside quote cards */
+    .share-btn-sm {
+      width: 28px !important;
+      height: 28px !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      border: none !important;
+      color: #fff !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .share-btn-sm:hover { transform: scale(1.15); background-clip: initial; }
+
     /* ── CTA BANNER ── */
     .cta-banner {
       background: var(--accent-light);
@@ -677,6 +727,17 @@
     <button class="filter-btn" data-filter="heartbreak" onclick="setFilter('heartbreak')">💔 Heartbreak</button>
     <button class="filter-btn" data-filter="boss" onclick="setFilter('boss')">👑 Boss Mode</button>
     <button class="filter-btn" data-filter="grateful" onclick="setFilter('grateful')">🙏 Grateful</button>
+    <button class="filter-btn" data-filter="finance" onclick="setFilter('finance')">💰 Finance</button>
+    <button class="filter-btn" data-filter="funfacts" onclick="setFilter('funfacts')">🤓 Fun Facts</button>
+    <button class="filter-btn" data-filter="animals" onclick="setFilter('animals')">🐾 Animals</button>
+    <button class="filter-btn" data-filter="health" onclick="setFilter('health')">💊 Health Tips</button>
+    <button class="filter-btn" data-filter="nature" onclick="setFilter('nature')">🌿 Mother Nature</button>
+    <button class="filter-btn" data-filter="rain" onclick="setFilter('rain')">🌧️ Rainy Days</button>
+    <button class="filter-btn" data-filter="cold" onclick="setFilter('cold')">❄️ Cold Weather</button>
+    <button class="filter-btn" data-filter="harmattan" onclick="setFilter('harmattan')">🌫️ Harmattan</button>
+    <button class="filter-btn" data-filter="memes" onclick="setFilter('memes')">😂 Memes</button>
+    <button class="filter-btn" data-filter="politics" onclick="setFilter('politics')">🏛️ Politics</button>
+    <button class="filter-btn" data-filter="inspirational" onclick="setFilter('inspirational')">✨ Inspirational</button>
   </div>
 
   <div class="quote-display">
@@ -685,9 +746,27 @@
     <div id="quote-category"></div>
   </div>
 
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem;">
     <button class="btn-shuffle" onclick="shuffleQuote()">⟳ &nbsp;Shuffle</button>
-    <button class="copy-btn" onclick="copyQuote()">Copy to clipboard</button>
+    <button class="copy-btn" onclick="copyQuote()">📋 Copy</button>
+  </div>
+  <div class="share-row" id="shuffler-share">
+    <span class="share-label">Share:</span>
+    <button class="share-btn share-whatsapp" onclick="shareShuffled('whatsapp')" title="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+    <button class="share-btn share-twitter" onclick="shareShuffled('twitter')" title="Twitter/X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 5.858 5.451-5.858zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </button>
+    <button class="share-btn share-facebook" onclick="shareShuffled('facebook')" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </button>
+    <button class="share-btn share-instagram" onclick="shareShuffled('instagram')" title="Copy & open Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </button>
+    <button class="share-btn share-tiktok" onclick="shareShuffled('tiktok')" title="Copy & open TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    </button>
   </div>
 </section>
 
@@ -1133,6 +1212,248 @@
     { text: "Find joy in the ordinary. Extraordinary will follow.", cat: "grateful", tags: ["grateful","happiness","life"] },
     { text: "Thank you for today. Even the messy parts.", cat: "grateful", tags: ["grateful","life"] },
     { text: "Blessed. Grateful. Still thriving.", cat: "grateful", tags: ["grateful","attitude","life"] },
+    // ── FINANCE (10 quotes) ──
+    { text: "Don't work for money. Make money work for you.", cat: "finance", tags: ["finance","motivation","boss"] },
+    { text: "A budget is telling your money where to go instead of wondering where it went.", cat: "finance", tags: ["finance","life"] },
+    { text: "Financial freedom is available to those who learn about it and work for it.", cat: "finance", tags: ["finance","motivation","success"] },
+    { text: "Save money and money will save you.", cat: "finance", tags: ["finance","life"] },
+    { text: "The best investment you can make is in yourself.", cat: "finance", tags: ["finance","motivation","selfcare"] },
+    { text: "Rich people acquire assets. Poor people acquire liabilities.", cat: "finance", tags: ["finance","success","boss"] },
+    { text: "It's not about how much money you make, but how much you keep.", cat: "finance", tags: ["finance","success","life"] },
+    { text: "Wealth is not about having a lot of money; it's about having a lot of options.", cat: "finance", tags: ["finance","life","success"] },
+    { text: "Do not save what is left after spending, but spend what is left after saving.", cat: "finance", tags: ["finance","motivation"] },
+    { text: "Compound interest is the eighth wonder of the world. He who understands it, earns it.", cat: "finance", tags: ["finance","success","funfacts"] },
+    { text: "Financial literacy is not taught in school but it's the most important subject.", cat: "finance", tags: ["finance","life","motivation"] },
+    { text: "An investment in knowledge pays the best interest.", cat: "finance", tags: ["finance","motivation","success"] },
+    { text: "Stop buying things you don't need to impress people you don't like.", cat: "finance", tags: ["finance","life","attitude"] },
+    { text: "Being broke is temporary. Being poor is a mindset.", cat: "finance", tags: ["finance","motivation","attitude"] },
+    { text: "Your income is not your wealth — your net worth is.", cat: "finance", tags: ["finance","success","boss"] },
+    { text: "Spend less than you earn. Invest the difference.", cat: "finance", tags: ["finance","success"] },
+    { text: "Money is a tool. Used properly it makes something beautiful.", cat: "finance", tags: ["finance","life","motivation"] },
+    { text: "The goal isn't more money. The goal is living life on your own terms.", cat: "finance", tags: ["finance","life","success"] },
+    { text: "Financial peace isn't the acquisition of stuff. It's learning to live on less.", cat: "finance", tags: ["finance","life","selfcare"] },
+    { text: "Every big purchase should answer: is this an asset or a liability?", cat: "finance", tags: ["finance","boss","success"] },
+
+    // ── FUN FACTS (10 quotes) ──
+    { text: "Honey never spoils. Archaeologists found 3,000-year-old honey in Egyptian tombs still perfectly edible.", cat: "funfacts", tags: ["funfacts","food","animals"] },
+    { text: "A day on Venus is longer than a year on Venus. Time is a social construct after all.", cat: "funfacts", tags: ["funfacts","nature"] },
+    { text: "Octopuses have three hearts, blue blood, and can edit their own RNA. Basically superheroes.", cat: "funfacts", tags: ["funfacts","animals"] },
+    { text: "Bananas are technically berries but strawberries are not. The world is a lie.", cat: "funfacts", tags: ["funfacts","food","nature"] },
+    { text: "The shortest war in history lasted 38-45 minutes. Between Britain and Zanzibar in 1896.", cat: "funfacts", tags: ["funfacts","politics"] },
+    { text: "Cows have best friends and get stressed when separated from them. Loyalty goals.", cat: "funfacts", tags: ["funfacts","animals","friendship"] },
+    { text: "A group of flamingos is called a flamboyance. No further questions.", cat: "funfacts", tags: ["funfacts","animals","humor"] },
+    { text: "The human brain uses about 20% of the body's total energy. Think wisely.", cat: "funfacts", tags: ["funfacts","health","motivation"] },
+    { text: "Trees can communicate with each other through underground fungal networks called the 'Wood Wide Web'.", cat: "funfacts", tags: ["funfacts","nature","animals"] },
+    { text: "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid.", cat: "funfacts", tags: ["funfacts","life"] },
+    { text: "Dolphins have names for each other and respond when called. Community standards.", cat: "funfacts", tags: ["funfacts","animals","friendship"] },
+    { text: "The Eiffel Tower grows about 15cm taller in summer due to heat expanding the metal.", cat: "funfacts", tags: ["funfacts","travel","nature"] },
+    { text: "A snail can sleep for up to three years. Respect the rest.", cat: "funfacts", tags: ["funfacts","animals","humor"] },
+    { text: "Your nose can detect over one trillion different smells.", cat: "funfacts", tags: ["funfacts","health","nature"] },
+    { text: "The heart of a blue whale is so large a small child could crawl through its arteries.", cat: "funfacts", tags: ["funfacts","animals","nature"] },
+    { text: "Sharks are older than trees. Let that sink in.", cat: "funfacts", tags: ["funfacts","animals","nature"] },
+    { text: "Laughter is the only medicine that has no side effects and is completely free.", cat: "funfacts", tags: ["funfacts","health","humor"] },
+    { text: "Wombats produce cube-shaped poop. Nature loves to keep us humble.", cat: "funfacts", tags: ["funfacts","animals","humor"] },
+    { text: "The average person walks about 100,000 miles in their lifetime. Equivalent to four times around the earth.", cat: "funfacts", tags: ["funfacts","health","life"] },
+    { text: "Oxford University is older than the Aztec Empire. Knowledge has always been power.", cat: "funfacts", tags: ["funfacts","life","motivation"] },
+
+    // ── ANIMALS (10 quotes) ──
+    { text: "The more I learn about people, the more I love my dog.", cat: "animals", tags: ["animals","humor","life"] },
+    { text: "Animals don't judge, don't lie, and don't complain. We could learn a lot.", cat: "animals", tags: ["animals","life","motivation"] },
+    { text: "A house is not a home without a pet.", cat: "animals", tags: ["animals","life","love"] },
+    { text: "Elephants are the only animals that can't jump. They're already perfect.", cat: "animals", tags: ["animals","funfacts","humor"] },
+    { text: "Dogs have masters. Cats have staff. Know your role.", cat: "animals", tags: ["animals","humor","attitude"] },
+    { text: "Until one has loved an animal, a part of one's soul remains unawakened.", cat: "animals", tags: ["animals","love","life"] },
+    { text: "Penguins propose with pebbles. Some animals understand romance better than humans.", cat: "animals", tags: ["animals","romantic","funfacts"] },
+    { text: "Animals are such agreeable friends — they ask no questions and pass no criticism.", cat: "animals", tags: ["animals","friendship","life","humor"] },
+    { text: "My pet doesn't care about my mood, my looks, or my job. Just my presence.", cat: "animals", tags: ["animals","life","love","selfcare"] },
+    { text: "Crows can recognise and remember human faces. Be kind — they never forget.", cat: "animals", tags: ["animals","funfacts","life"] },
+    { text: "A cat's purr has healing frequencies. Some animals are just built different.", cat: "animals", tags: ["animals","health","funfacts"] },
+    { text: "Wolves mate for life. Loyalty isn't just a human trait.", cat: "animals", tags: ["animals","romantic","life"] },
+    { text: "Otters hold hands while sleeping so they don't drift apart. Relationship goals.", cat: "animals", tags: ["animals","romantic","cute","funfacts"] },
+    { text: "Bees make decisions democratically. Even nature knows group consensus matters.", cat: "animals", tags: ["animals","funfacts","life","politics"] },
+    { text: "The animal that kills the most humans annually is the mosquito. Respect the tiny.", cat: "animals", tags: ["animals","funfacts","health"] },
+    { text: "Sea otters wrap themselves in kelp so they don't float away while sleeping. Smart and cosy.", cat: "animals", tags: ["animals","funfacts","humor"] },
+    { text: "A dog's love is the closest thing to unconditional love most of us will ever experience.", cat: "animals", tags: ["animals","love","life"] },
+    { text: "Butterflies taste with their feet. Imagine walking into a restaurant and instantly knowing the menu.", cat: "animals", tags: ["animals","funfacts","humor","food"] },
+    { text: "Protect wildlife. Future generations deserve to see elephants, not just hear stories about them.", cat: "animals", tags: ["animals","nature","life"] },
+    { text: "Animals have taught me that trust is earned, loyalty is rare, and play is necessary.", cat: "animals", tags: ["animals","life","motivation"] },
+
+    // ── HEALTH TIPS (10 quotes) ──
+    { text: "Drink water like it's your job. Most of the time, your body is just thirsty.", cat: "health", tags: ["health","selfcare","life"] },
+    { text: "Sleep is the best medicine and it's free.", cat: "health", tags: ["health","selfcare","night"] },
+    { text: "Your mental health is just as important as your physical health.", cat: "health", tags: ["health","selfcare","motivation"] },
+    { text: "Move your body every day. Even a 10-minute walk counts.", cat: "health", tags: ["health","workout","selfcare"] },
+    { text: "You can't out-exercise a bad diet. Eat well first.", cat: "health", tags: ["health","food","workout"] },
+    { text: "Stress is the silent killer. Protect your peace aggressively.", cat: "health", tags: ["health","selfcare","life"] },
+    { text: "Your gut is your second brain. Feed it well and it'll treat you well.", cat: "health", tags: ["health","food","funfacts"] },
+    { text: "Sunscreen today, fewer regrets tomorrow.", cat: "health", tags: ["health","selfcare","life"] },
+    { text: "Deep breathing reduces stress almost instantly. Free therapy, available always.", cat: "health", tags: ["health","selfcare","calm"] },
+    { text: "Regular check-ups are cheaper than emergencies. Don't wait until it hurts.", cat: "health", tags: ["health","life","motivation"] },
+    { text: "Vegetables won't kill you but ignoring them might.", cat: "health", tags: ["health","food","humor"] },
+    { text: "Your immune system is your bodyguard. Sleep, hydration, and good food are its salary.", cat: "health", tags: ["health","selfcare","food"] },
+    { text: "Walking is underrated. It's free, it works, and the scenery changes.", cat: "health", tags: ["health","workout","life"] },
+    { text: "Limiting screen time before bed can dramatically improve your sleep quality.", cat: "health", tags: ["health","selfcare","night"] },
+    { text: "Laughter lowers blood pressure, boosts immunity, and burns calories. Laugh more.", cat: "health", tags: ["health","humor","life","funfacts"] },
+    { text: "Hydration is the cheapest anti-aging solution on the market.", cat: "health", tags: ["health","selfcare","life"] },
+    { text: "A healthy outside starts from the inside.", cat: "health", tags: ["health","selfcare","motivation"] },
+    { text: "Your posture affects your mood. Sit up straight and notice the difference.", cat: "health", tags: ["health","selfcare","funfacts"] },
+    { text: "The best doctor is one who makes lifestyle improvements before prescribing pills.", cat: "health", tags: ["health","life","motivation"] },
+    { text: "Rest is productive. Your body heals, repairs and resets when you sleep.", cat: "health", tags: ["health","selfcare","night"] },
+
+    // ── MOTHER NATURE (10 quotes) ──
+    { text: "In every walk with nature, one receives far more than one seeks.", cat: "nature", tags: ["nature","life","travel"] },
+    { text: "The earth does not belong to us. We belong to the earth.", cat: "nature", tags: ["nature","life","grateful"] },
+    { text: "Nature always wears the colours of the spirit.", cat: "nature", tags: ["nature","life","inspiration"] },
+    { text: "Adopt the pace of nature: her secret is patience.", cat: "nature", tags: ["nature","calm","motivation"] },
+    { text: "The clearest way into the universe is through a forest wilderness.", cat: "nature", tags: ["nature","life","travel"] },
+    { text: "Not all classrooms have walls. Some have trees, rivers, and open skies.", cat: "nature", tags: ["nature","life","travel"] },
+    { text: "There is no WiFi in the forest but I promise you'll find a better connection.", cat: "nature", tags: ["nature","life","humor","travel"] },
+    { text: "A sunset is proof that endings can be beautiful too.", cat: "nature", tags: ["nature","life","inspirational"] },
+    { text: "The ocean teaches us that there is beauty in depth and power in stillness.", cat: "nature", tags: ["nature","life","calm"] },
+    { text: "Flowers don't compete with each other — they just bloom.", cat: "nature", tags: ["nature","life","motivation","attitude"] },
+    { text: "Trees lose their leaves every year and still stand tall. Resilience is natural.", cat: "nature", tags: ["nature","motivation","strength","life"] },
+    { text: "Go outside. The world is too beautiful to spend it all indoors.", cat: "nature", tags: ["nature","life","health","travel"] },
+    { text: "The earth laughs in flowers.", cat: "nature", tags: ["nature","happiness","life"] },
+    { text: "Mountains know secrets we need to learn: how to stand firm, how to endure.", cat: "nature", tags: ["nature","motivation","strength","life"] },
+    { text: "Water does not resist. It flows. Be like water.", cat: "nature", tags: ["nature","life","calm","motivation"] },
+    { text: "Look deep into nature, and then you will understand everything better.", cat: "nature", tags: ["nature","life","motivation"] },
+    { text: "The stars remind us that even in darkness there are things that shine.", cat: "nature", tags: ["nature","night","motivation","life"] },
+    { text: "Nature is not a place to visit. It is home.", cat: "nature", tags: ["nature","life","travel"] },
+    { text: "Climate change is real. Act like your children will inherit this earth.", cat: "nature", tags: ["nature","life","politics"] },
+    { text: "Every wildflower that blooms is nature's way of saying: beauty exists here.", cat: "nature", tags: ["nature","life","happiness"] },
+
+    // ── RAINY DAYS (10 quotes) ──
+    { text: "Rain is just confetti from the sky.", cat: "rain", tags: ["rain","nature","humor"] },
+    { text: "A rainy day is the perfect excuse to do everything you've been putting off.", cat: "rain", tags: ["rain","life","humor","relatable"] },
+    { text: "Let the rain wash away everything that no longer serves you.", cat: "rain", tags: ["rain","life","selfcare","calm"] },
+    { text: "Some people feel the rain. Others just get wet.", cat: "rain", tags: ["rain","life","attitude","motivation"] },
+    { text: "Rainy days are nature's way of saying: slow down, stay in, be still.", cat: "rain", tags: ["rain","nature","calm","selfcare"] },
+    { text: "There's something healing about the sound of rain.", cat: "rain", tags: ["rain","selfcare","calm","nature"] },
+    { text: "Rain and coffee and a good book. That's a perfect day.", cat: "rain", tags: ["rain","coffee","life","happiness"] },
+    { text: "Life isn't about waiting for the storm to pass. It's about dancing in the rain.", cat: "rain", tags: ["rain","life","motivation","attitude"] },
+    { text: "Rainy days remind me to slow down and appreciate the cosy things.", cat: "rain", tags: ["rain","life","grateful","calm"] },
+    { text: "After every storm comes a rainbow. Hold on.", cat: "rain", tags: ["rain","motivation","life","strength"] },
+    { text: "The rain doesn't care about your plans. Neither should you sometimes.", cat: "rain", tags: ["rain","life","humor","calm"] },
+    { text: "Wet hair, warm drink, nowhere to be. This is it.", cat: "rain", tags: ["rain","selfcare","happiness","relatable"] },
+    { text: "Rain is the sky's way of crying — and even the sky needs a release.", cat: "rain", tags: ["rain","life","nature","heartbreak"] },
+    { text: "Every rainy day is an invitation to create something indoors.", cat: "rain", tags: ["rain","life","motivation"] },
+    { text: "Without rain, nothing grows. Embrace your storms.", cat: "rain", tags: ["rain","motivation","strength","life"] },
+    { text: "The best naps happen when it's raining outside.", cat: "rain", tags: ["rain","selfcare","humor","relatable"] },
+    { text: "Rainy weather is introverts' favourite weather. Validated at last.", cat: "rain", tags: ["rain","humor","relatable","life"] },
+    { text: "A rainy day is nature giving you permission to rest.", cat: "rain", tags: ["rain","selfcare","nature","calm"] },
+    { text: "The sound of rain is the universe's ASMR.", cat: "rain", tags: ["rain","nature","humor","calm"] },
+    { text: "No storm lasts forever. The sky always clears.", cat: "rain", tags: ["rain","motivation","life","strength"] },
+
+    // ── COLD WEATHER (10 quotes) ──
+    { text: "Cold weather is just the universe forcing you to cuddle.", cat: "cold", tags: ["cold","humor","romantic"] },
+    { text: "Hot chocolate was invented for cold days. That's not science but it's true.", cat: "cold", tags: ["cold","food","humor"] },
+    { text: "There is no bad weather, only inappropriate clothing.", cat: "cold", tags: ["cold","life","humor","attitude"] },
+    { text: "Cold nights make the warmth of good company even better.", cat: "cold", tags: ["cold","friendship","romantic","life"] },
+    { text: "Winter is the season of inner reflection. Use it.", cat: "cold", tags: ["cold","life","selfcare","motivation"] },
+    { text: "Bundled up, warmed up, and ready for nothing productive today.", cat: "cold", tags: ["cold","humor","relatable"] },
+    { text: "Cold weather: when layers become both fashion and survival.", cat: "cold", tags: ["cold","humor","attitude"] },
+    { text: "In cold weather, even the sunrise feels like a reward.", cat: "cold", tags: ["cold","morning","grateful","nature"] },
+    { text: "A warm blanket on a cold day is peak happiness.", cat: "cold", tags: ["cold","selfcare","happiness","relatable"] },
+    { text: "Cold hands, warm heart. At least that's what I tell people.", cat: "cold", tags: ["cold","romantic","humor"] },
+    { text: "The cold makes you appreciate warmth in all its forms.", cat: "cold", tags: ["cold","life","grateful"] },
+    { text: "Winter mornings require triple the motivation and double the coffee.", cat: "cold", tags: ["cold","morning","coffee","humor"] },
+    { text: "Cold weather is the only time staying in feels like an achievement.", cat: "cold", tags: ["cold","humor","relatable","selfcare"] },
+    { text: "Soup season is the best season. No debate.", cat: "cold", tags: ["cold","food","humor"] },
+    { text: "The cold is just the world asking you to slow down.", cat: "cold", tags: ["cold","calm","life","nature"] },
+    { text: "Frosted mornings remind you that beauty requires stillness.", cat: "cold", tags: ["cold","morning","nature","life"] },
+    { text: "Cold weather test: only the warmest friendships survive the urge to stay home.", cat: "cold", tags: ["cold","friendship","humor"] },
+    { text: "There's something magical about a cold quiet morning and warm hands around a mug.", cat: "cold", tags: ["cold","morning","coffee","happiness"] },
+    { text: "Cold days are made for slow living.", cat: "cold", tags: ["cold","life","calm","selfcare"] },
+    { text: "Even the trees go bare in winter and come back stronger. Nature is always teaching.", cat: "cold", tags: ["cold","nature","motivation","life"] },
+
+    // ── HARMATTAN (10 quotes) ──
+    { text: "Harmattan comes every year and every year I forget how dry it gets.", cat: "harmattan", tags: ["harmattan","humor","relatable"] },
+    { text: "Harmattan season: when your lips need more attention than your notifications.", cat: "harmattan", tags: ["harmattan","humor","relatable","selfcare"] },
+    { text: "Lotion is the unofficial currency of Harmattan season.", cat: "harmattan", tags: ["harmattan","humor","relatable"] },
+    { text: "Harmattan dust on a freshly cleaned surface is the universe testing your patience.", cat: "harmattan", tags: ["harmattan","humor","relatable","angry"] },
+    { text: "Harmattan is cold, dry, and persistent. A lot like some people I know.", cat: "harmattan", tags: ["harmattan","humor","sarcasm"] },
+    { text: "The Harmattan haze makes sunsets look like paintings. Find beauty in every season.", cat: "harmattan", tags: ["harmattan","nature","life","grateful"] },
+    { text: "In Harmattan, the air is crisp and the skin is crispier. Apply generously.", cat: "harmattan", tags: ["harmattan","humor","relatable","selfcare"] },
+    { text: "There's a certain quiet that comes with Harmattan mornings. It feels like the world paused.", cat: "harmattan", tags: ["harmattan","morning","calm","nature"] },
+    { text: "Every season has its lessons. Harmattan teaches you: hydrate or suffer.", cat: "harmattan", tags: ["harmattan","life","health","humor"] },
+    { text: "Harmattan fashion: layers on layers, vaseline on deck.", cat: "harmattan", tags: ["harmattan","humor","relatable"] },
+    { text: "Harmattan sunsets are some of the most beautiful things this part of the world produces.", cat: "harmattan", tags: ["harmattan","nature","grateful","life"] },
+    { text: "Cold Harmattan mornings and hot tea — a relationship I fully endorse.", cat: "harmattan", tags: ["harmattan","morning","food","happiness"] },
+    { text: "Harmattan reminds you that even harsh seasons are temporary.", cat: "harmattan", tags: ["harmattan","life","motivation","strength"] },
+    { text: "If you survive Harmattan skin without a good moisturiser, you deserve a trophy.", cat: "harmattan", tags: ["harmattan","humor","relatable"] },
+    { text: "The Harmattan wind carries stories from the Sahara. Listen closely.", cat: "harmattan", tags: ["harmattan","nature","life"] },
+    { text: "Dust settles. So does everything else. Harmattan is just more honest about it.", cat: "harmattan", tags: ["harmattan","life","calm","humor"] },
+    { text: "West African Harmattan hits different — cold mornings, warm afternoons, dusty everything.", cat: "harmattan", tags: ["harmattan","life","humor","relatable"] },
+    { text: "Harmattan is nature's annual reminder to take better care of your skin.", cat: "harmattan", tags: ["harmattan","health","selfcare","humor"] },
+    { text: "Harmattan season check: lip balm, body lotion, warm socks. Proceed.", cat: "harmattan", tags: ["harmattan","selfcare","humor","relatable"] },
+    { text: "Even in Harmattan the sun rises. Even in harsh seasons, there is light.", cat: "harmattan", tags: ["harmattan","morning","nature","motivation"] },
+
+    // ── MEMES (10 quotes) ──
+    { text: "Me: I'll sleep early tonight. Brain at 2am: remember that embarrassing thing from 2009?", cat: "memes", tags: ["memes","humor","relatable","night"] },
+    { text: "Current status: waiting for someone to read my mind because explaining is exhausting.", cat: "memes", tags: ["memes","humor","relatable"] },
+    { text: "Normal people: 'I'm fine.' Me: fine is just a setting I pretend to have.", cat: "memes", tags: ["memes","humor","relatable"] },
+    { text: "POV: you opened the fridge, saw nothing, closed it, and opened it again hoping for miracles.", cat: "memes", tags: ["memes","humor","relatable","food"] },
+    { text: "My vibe today: I'm fine but in a 'the building is on fire' kind of way.", cat: "memes", tags: ["memes","humor","relatable","crazy"] },
+    { text: "Me: I need to be productive. Also me: let me organise my phone for the fifth time.", cat: "memes", tags: ["memes","humor","relatable"] },
+    { text: "I said what I said. (I have no memory of what I said.)", cat: "memes", tags: ["memes","humor","relatable","crazy"] },
+    { text: "Plot twist: the 'main character' has been the snacks all along.", cat: "memes", tags: ["memes","humor","food","relatable"] },
+    { text: "Therapist: and what do we say instead of 'it is what it is'? Me: ...it is what it is.", cat: "memes", tags: ["memes","humor","relatable","life"] },
+    { text: "My energy is very much 'trying my best but make it chaotic'.", cat: "memes", tags: ["memes","humor","relatable","crazy"] },
+    { text: "Me explaining my problems vs me actually solving them: vastly different skill levels.", cat: "memes", tags: ["memes","humor","relatable"] },
+    { text: "Red flag: I ignored it. Orange flag: also ignored. Green flag: finally a nap.", cat: "memes", tags: ["memes","humor","relatable","heartbreak"] },
+    { text: "We move. (We don't move. We have the same problems. We just say 'we move'.)", cat: "memes", tags: ["memes","humor","relatable","life"] },
+    { text: "The only cardio I do is jumping to conclusions.", cat: "memes", tags: ["memes","humor","relatable","workout"] },
+    { text: "Low maintenance: I just want snacks, silence, and nobody asking me anything.", cat: "memes", tags: ["memes","humor","relatable","selfcare"] },
+    { text: "Villain origin story: someone ate my food.", cat: "memes", tags: ["memes","humor","food","angry"] },
+    { text: "Functioning adult? On some days. Today is not that day.", cat: "memes", tags: ["memes","humor","relatable"] },
+    { text: "Me before bed: tomorrow I'll be better. Tomorrow morning: lol no.", cat: "memes", tags: ["memes","humor","relatable","morning"] },
+    { text: "The audacity of Monday to show up every single week.", cat: "memes", tags: ["memes","humor","monday","relatable"] },
+    { text: "My personality is 30% coffee, 30% sarcasm, and 40% 'I need a minute'.", cat: "memes", tags: ["memes","humor","relatable","coffee"] },
+
+    // ── POLITICS (10 quotes) ──
+    { text: "The price of apathy towards public affairs is to be ruled by evil men.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "All it takes for bad governance to thrive is for good people to stay silent.", cat: "politics", tags: ["politics","life","motivation","attitude"] },
+    { text: "Your vote is your voice. Use it like it matters — because it does.", cat: "politics", tags: ["politics","motivation","life"] },
+    { text: "Politicians are like diapers — they should both be changed regularly and for the same reason.", cat: "politics", tags: ["politics","humor","sarcasm"] },
+    { text: "Power tends to corrupt and absolute power corrupts absolutely.", cat: "politics", tags: ["politics","life","attitude"] },
+    { text: "A nation's greatness is measured by how it treats its weakest members.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "Democracy is not a spectator sport.", cat: "politics", tags: ["politics","motivation","life"] },
+    { text: "The first duty of society is justice.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "Never doubt that a small group of thoughtful citizens can change the world.", cat: "politics", tags: ["politics","motivation","life","success"] },
+    { text: "In a democracy, silence is complicity.", cat: "politics", tags: ["politics","life","attitude","motivation"] },
+    { text: "Leadership is not about being in charge. It's about taking care of those in your charge.", cat: "politics", tags: ["politics","boss","life","motivation"] },
+    { text: "Bad politicians are elected by good people who don't vote.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "Education is the most powerful weapon you can use to change a nation.", cat: "politics", tags: ["politics","motivation","success","life"] },
+    { text: "The function of education is to teach one to think intensively and critically.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "Social justice is not charity. It is the recognition of rights.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "A people without knowledge of their history is like a tree without roots.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "It's easier to fool people than to convince them they have been fooled.", cat: "politics", tags: ["politics","life","sarcasm","attitude"] },
+    { text: "Freedom is never voluntarily given by the oppressor; it must be demanded by the oppressed.", cat: "politics", tags: ["politics","motivation","attitude","strength"] },
+    { text: "The test of our progress is not whether we add more to those who have much — it is whether we provide enough for those who have little.", cat: "politics", tags: ["politics","life","motivation"] },
+    { text: "Be the change you wish to see in the government — vote, speak up, show up.", cat: "politics", tags: ["politics","motivation","life","attitude"] },
+
+    // ── INSPIRATIONAL (10 quotes) ──
+    { text: "The world breaks everyone and afterward many are strong in the broken places.", cat: "inspirational", tags: ["inspirational","strength","life","motivation"] },
+    { text: "You were given this life because you are strong enough to live it.", cat: "inspirational", tags: ["inspirational","strength","life","motivation"] },
+    { text: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.", cat: "inspirational", tags: ["inspirational","motivation","life","success"] },
+    { text: "Even the darkest night will end and the sun will rise.", cat: "inspirational", tags: ["inspirational","motivation","life","strength"] },
+    { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", cat: "inspirational", tags: ["inspirational","motivation","strength","life"] },
+    { text: "You don't need to see the whole staircase. Just take the first step.", cat: "inspirational", tags: ["inspirational","motivation","courage","life"] },
+    { text: "The oak sleeps in the acorn. Inside the dream lies the destiny.", cat: "inspirational", tags: ["inspirational","motivation","life","dreams"] },
+    { text: "Not all storms come to disrupt your life. Some come to clear your path.", cat: "inspirational", tags: ["inspirational","life","motivation","strength"] },
+    { text: "Everything you need is already within you.", cat: "inspirational", tags: ["inspirational","motivation","selfcare","confidence"] },
+    { text: "The only journey is the one within.", cat: "inspirational", tags: ["inspirational","life","selfcare","motivation"] },
+    { text: "When you reach the end of your rope, tie a knot and hang on.", cat: "inspirational", tags: ["inspirational","strength","motivation","life"] },
+    { text: "Courage doesn't always roar. Sometimes it's the quiet voice at the end of the day saying 'I will try again tomorrow'.", cat: "inspirational", tags: ["inspirational","courage","strength","motivation"] },
+    { text: "The human spirit is stronger than anything that can happen to it.", cat: "inspirational", tags: ["inspirational","strength","life","motivation"] },
+    { text: "It always seems impossible until it's done.", cat: "inspirational", tags: ["inspirational","motivation","success","courage"] },
+    { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", cat: "inspirational", tags: ["inspirational","confidence","strength","motivation"] },
+    { text: "Stars don't shine without darkness. Neither do you.", cat: "inspirational", tags: ["inspirational","strength","life","motivation"] },
+    { text: "Hope is being able to see light despite all of the darkness.", cat: "inspirational", tags: ["inspirational","life","strength","motivation"] },
+    { text: "In the middle of every difficulty lies opportunity.", cat: "inspirational", tags: ["inspirational","motivation","success","life"] },
+    { text: "Your present circumstances don't determine where you can go — they merely determine where you start.", cat: "inspirational", tags: ["inspirational","motivation","life","success"] },
+    { text: "Rise above the storm and you will find the sunshine.", cat: "inspirational", tags: ["inspirational","motivation","strength","life"] },
+
   ];
 
   // All unique tags
@@ -1189,15 +1510,48 @@
     }, 200);
   }
 
+  function getShareUrl(platform, text) {
+    const encoded = encodeURIComponent('"' + text + '" — via StatusShuffle');
+    const siteUrl = encodeURIComponent(window.location.href);
+    switch(platform) {
+      case 'whatsapp':  return 'https://wa.me/?text=' + encoded;
+      case 'twitter':   return 'https://twitter.com/intent/tweet?text=' + encoded;
+      case 'facebook':  return 'https://www.facebook.com/sharer/sharer.php?u=' + siteUrl;
+      case 'instagram':
+        navigator.clipboard.writeText('"' + text + '"');
+        showToast('Copied! Now paste in Instagram ✓');
+        window.open('https://www.instagram.com/', '_blank');
+        return null;
+      case 'tiktok':
+        navigator.clipboard.writeText('"' + text + '"');
+        showToast('Copied! Now paste in TikTok ✓');
+        window.open('https://www.tiktok.com/', '_blank');
+        return null;
+    }
+  }
+
+  function shareShuffled(platform) {
+    const text = document.getElementById('shuffled-quote').textContent;
+    if (text === 'Hit shuffle and discover your next perfect status update.') return;
+    const url = getShareUrl(platform, text);
+    if (url) window.open(url, '_blank');
+  }
+
+  function shareText(text, platform) {
+    const url = getShareUrl(platform, text);
+    if (url) window.open(url, '_blank');
+  }
+
   function copyQuote() {
     const text = document.getElementById('shuffled-quote').textContent;
     navigator.clipboard.writeText('"' + text + '"').then(() => showToast());
   }
 
-  function showToast() {
+  function showToast(msg) {
     const t = document.getElementById('toast');
+    if (msg) t.textContent = msg;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
+    setTimeout(() => { t.classList.remove('show'); t.textContent = '✓ Copied to clipboard!'; }, 2200);
   }
 
   const labels = {
@@ -1208,13 +1562,17 @@
     success:'🏆 Success', selfcare:'🧘 Self-Care', monday:'😩 Monday',
     travel:'✈️ Travel', food:'🍕 Foodie', workout:'💪 Workout',
     christmas:'🎄 Christmas', newyear:'🥂 New Year', heartbreak:'💔 Heartbreak',
-    boss:'👑 Boss Mode', grateful:'🙏 Grateful'
+    boss:'👑 Boss Mode', grateful:'🙏 Grateful',
+    finance:'💰 Finance', funfacts:'🤓 Fun Facts', animals:'🐾 Animals',
+    health:'💊 Health Tips', nature:'🌿 Mother Nature', rain:'🌧️ Rainy Days',
+    cold:'❄️ Cold Weather', harmattan:'🌫️ Harmattan', memes:'😂 Memes',
+    politics:'🏛️ Politics', inspirational:'✨ Inspirational'
   };
 
   function buildPopularGrid() {
     const pool = activeTag
       ? quotes.filter(q => (q.tags||[]).includes(activeTag))
-      : quotes.filter(q => ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful']
+      : quotes.filter(q => ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful','finance','funfacts','animals','health','nature','rain','cold','harmattan','memes','politics','inspirational']
           .map((c,i) => quotes.filter(x => x.cat===c)[i % quotes.filter(x=>x.cat===c).length])
         ).slice(0,12);
 
@@ -1232,14 +1590,28 @@
           <div class="quote-card-text">"${q.text}"</div>
           <div class="quote-card-actions">
             <button class="icon-btn" onclick="copyText('${safe}')">📋 Copy</button>
-            <button class="icon-btn">♡ Save</button>
+            <button class="icon-btn share-btn-sm share-whatsapp" onclick="shareText('${safe}','whatsapp')" title="WhatsApp">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </button>
+            <button class="icon-btn share-btn-sm share-twitter" onclick="shareText('${safe}','twitter')" title="Twitter/X">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 5.858 5.451-5.858zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </button>
+            <button class="icon-btn share-btn-sm share-facebook" onclick="shareText('${safe}','facebook')" title="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </button>
+            <button class="icon-btn share-btn-sm share-instagram" onclick="shareText('${safe}','instagram')" title="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </button>
+            <button class="icon-btn share-btn-sm share-tiktok" onclick="shareText('${safe}','tiktok')" title="TikTok">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+            </button>
           </div>
         </div>`;
     });
   }
 
   function getDiverseSample(n) {
-    const cats = ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful'];
+    const cats = ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful','finance','funfacts','animals','health','nature','rain','cold','harmattan','memes','politics','inspirational'];
     const result = [];
     const usedIdx = {};
     cats.forEach(c => usedIdx[c] = []);
