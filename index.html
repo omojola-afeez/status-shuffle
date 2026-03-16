@@ -473,6 +473,150 @@
     .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--ink); }
 
+    /* ── APP DOWNLOAD SECTION ── */
+    .app-download-section {
+      background: linear-gradient(135deg, #1a1814 0%, #2d2620 100%);
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .app-download-section .app-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .app-download-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .app-download-section p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    .app-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .app-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 0.75rem 1.4rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+      text-decoration: none;
+      min-width: 180px;
+    }
+    .app-badge:hover {
+      background: rgba(255,255,255,0.13);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .app-badge svg { flex-shrink: 0; }
+    .app-badge-text { text-align: left; }
+    .app-badge-text small {
+      display: block;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.1rem;
+    }
+    .app-badge-text strong {
+      display: block;
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 600;
+    }
+    .app-pwa-note {
+      background: rgba(200,98,42,0.12);
+      border: 1px solid rgba(200,98,42,0.3);
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .app-pwa-note strong { color: var(--accent); }
+    .app-install-steps {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .app-install-step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.2rem;
+      flex: 1;
+      min-width: 200px;
+      text-align: left;
+    }
+    .app-install-step .step-platform {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .app-install-step ol {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    .app-install-step ol li { margin-bottom: 0.2rem; }
+    .btn-install-pwa {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.8rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 1.5rem;
+      display: none;
+    }
+    .btn-install-pwa.visible { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-install-pwa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,98,42,0.4); }
+    .app-coming-soon {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: rgba(200,98,42,0.25);
+      color: var(--accent);
+      border-radius: 20px;
+      padding: 0.15rem 0.5rem;
+      margin-left: 0.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
+
     /* ── TOPICS TAG CLOUD ── */
     .topics-section {
       padding: 4rem;
@@ -587,6 +731,8 @@
       .stats { gap: 2rem; padding: 1.5rem; flex-wrap: wrap; }
       .shuffle-section { padding: 3rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .app-install-step { min-width: 100%; }
+      .app-badges { flex-direction: column; align-items: center; }
     }
 
     /* ═══════════════════════════════════════
@@ -1354,6 +1500,70 @@
   <h2>Never run out of things to say.</h2>
   <p>New quotes added every day. Bookmark this page and always have the perfect status ready.</p>
   <button class="btn-primary" onclick="document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">Start Shuffling ✦</button>
+</div>
+
+<!-- APP DOWNLOAD SECTION -->
+<div class="app-download-section" id="get-app">
+  <p class="app-eyebrow">Get the App</p>
+  <h2>Take Status Shuffle Everywhere</h2>
+  <p>Install the app on your phone and get instant access to 500+ quotes — even when you're offline. No App Store needed.</p>
+
+  <!-- Store Badges (Coming Soon) -->
+  <div class="app-badges">
+    <a class="app-badge" href="#get-app" onclick="showIOSSteps(); return false;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="app-badge-text">
+        <small>Download on the</small>
+        <strong>App Store <span class="app-coming-soon">Soon</span></strong>
+      </div>
+    </a>
+    <a class="app-badge" href="#get-app" onclick="showAndroidSteps(); return false;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.3.17.64.17.96 0l10.5-6.04-2.25-2.26-9.21 8.3zM.32 1.9C.12 2.14 0 2.5 0 2.97v18.06c0 .48.12.84.33 1.08l.06.06 10.12-10.12v-.23L.38 1.83l-.06.07zm20.52 8.28l-2.88-1.66-2.54 2.54 2.54 2.54 2.9-1.67c.82-.48.82-1.26-.02-1.75zm-16.66 9.5l9.21-8.3-2.25-2.25L.32 20.7c.3.33.75.38 3.86-.02z"/></svg>
+      <div class="app-badge-text">
+        <small>Get it on</small>
+        <strong>Google Play <span class="app-coming-soon">Soon</span></strong>
+      </div>
+    </a>
+  </div>
+
+  <!-- PWA Install Note -->
+  <div class="app-pwa-note">
+    <strong>✦ Available right now as a Web App!</strong><br>
+    Install Status Shuffle directly from your browser — works offline, loads instantly, and feels just like a native app.
+  </div>
+
+  <!-- Android PWA Install Button (shown dynamically) -->
+  <button class="btn-install-pwa" id="footer-install-btn" onclick="triggerPWAInstall()">
+    📲 Install App Now
+  </button>
+
+  <!-- Step by step instructions -->
+  <div class="app-install-steps">
+    <div class="app-install-step" id="ios-steps">
+      <div class="step-platform">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        iPhone / iPad (Safari)
+      </div>
+      <ol>
+        <li>Open this site in <strong style="color:#fff">Safari</strong></li>
+        <li>Tap the <strong style="color:#fff">Share</strong> button (box with arrow)</li>
+        <li>Scroll and tap <strong style="color:#fff">"Add to Home Screen"</strong></li>
+        <li>Tap <strong style="color:#fff">"Add"</strong> — done! ✓</li>
+      </ol>
+    </div>
+    <div class="app-install-step" id="android-steps">
+      <div class="step-platform">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.17.96 0l10.5-6.04-2.25-2.26-9.21 8.3zM.32 1.9C.12 2.14 0 2.5 0 2.97v18.06c0 .48.12.84.33 1.08l.06.06 10.12-10.12v-.23L.38 1.83l-.06.07zm20.52 8.28l-2.88-1.66-2.54 2.54 2.54 2.54 2.9-1.67c.82-.48.82-1.26-.02-1.75zm-16.66 9.5l9.21-8.3-2.25-2.25L.32 20.7c.3.33.75.38 3.86-.02z"/></svg>
+        Android (Chrome)
+      </div>
+      <ol>
+        <li>Open this site in <strong style="color:#fff">Chrome</strong></li>
+        <li>Tap the <strong style="color:#fff">⋮ menu</strong> (top right)</li>
+        <li>Tap <strong style="color:#fff">"Add to Home Screen"</strong></li>
+        <li>Tap <strong style="color:#fff">"Install"</strong> — done! ✓</li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -2195,6 +2405,27 @@
   buildPopularGrid();
   shuffleQuote();
 
+  // ── App Download Section JS ──
+  function showIOSSteps() {
+    document.getElementById('ios-steps').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('ios-steps').style.borderColor = 'var(--accent)';
+    setTimeout(() => document.getElementById('ios-steps').style.borderColor = '', 2000);
+  }
+  function showAndroidSteps() {
+    document.getElementById('android-steps').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('android-steps').style.borderColor = 'var(--accent)';
+    setTimeout(() => document.getElementById('android-steps').style.borderColor = '', 2000);
+  }
+  function triggerPWAInstall() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        document.getElementById('footer-install-btn').classList.remove('visible');
+      });
+    }
+  }
+
   // ── PWA: Service Worker ──
 
   // ══════════════════════════════════════════
@@ -2626,6 +2857,9 @@
     e.preventDefault();
     deferredPrompt = e;
     setTimeout(() => banner.classList.add('visible'), 3000);
+    // Also show footer install button
+    const footerBtn = document.getElementById('footer-install-btn');
+    if (footerBtn) footerBtn.classList.add('visible');
   });
 
   btnInstall.addEventListener('click', async () => {
