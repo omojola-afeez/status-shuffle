@@ -661,6 +661,22 @@
     <button class="filter-btn" data-filter="life" onclick="setFilter('life')">🌿 Life</button>
     <button class="filter-btn" data-filter="angry" onclick="setFilter('angry')">🔥 Angry</button>
     <button class="filter-btn" data-filter="crazy" onclick="setFilter('crazy')">🤪 Crazy</button>
+    <button class="filter-btn" data-filter="tgif" onclick="setFilter('tgif')">🎉 TGIF</button>
+    <button class="filter-btn" data-filter="mothers" onclick="setFilter('mothers')">🌸 Mother's Day</button>
+    <button class="filter-btn" data-filter="birthday" onclick="setFilter('birthday')">🎂 Birthday</button>
+    <button class="filter-btn" data-filter="morning" onclick="setFilter('morning')">☀️ Morning</button>
+    <button class="filter-btn" data-filter="night" onclick="setFilter('night')">🌙 Night</button>
+    <button class="filter-btn" data-filter="success" onclick="setFilter('success')">🏆 Success</button>
+    <button class="filter-btn" data-filter="selfcare" onclick="setFilter('selfcare')">🧘 Self-Care</button>
+    <button class="filter-btn" data-filter="monday" onclick="setFilter('monday')">😩 Monday</button>
+    <button class="filter-btn" data-filter="travel" onclick="setFilter('travel')">✈️ Travel</button>
+    <button class="filter-btn" data-filter="food" onclick="setFilter('food')">🍕 Foodie</button>
+    <button class="filter-btn" data-filter="workout" onclick="setFilter('workout')">💪 Workout</button>
+    <button class="filter-btn" data-filter="christmas" onclick="setFilter('christmas')">🎄 Christmas</button>
+    <button class="filter-btn" data-filter="newyear" onclick="setFilter('newyear')">🥂 New Year</button>
+    <button class="filter-btn" data-filter="heartbreak" onclick="setFilter('heartbreak')">💔 Heartbreak</button>
+    <button class="filter-btn" data-filter="boss" onclick="setFilter('boss')">👑 Boss Mode</button>
+    <button class="filter-btn" data-filter="grateful" onclick="setFilter('grateful')">🙏 Grateful</button>
   </div>
 
   <div class="quote-display">
@@ -872,6 +888,251 @@
     { text: "I have multiple personalities and none of them like you.", cat: "crazy", tags: ["crazy","humor","sarcasm"] },
     { text: "I'm an acquired taste. If you don't like me, acquire some taste.", cat: "crazy", tags: ["crazy","attitude","humor"] },
     { text: "I may be crazy, but crazy is better than boring.", cat: "crazy", tags: ["crazy","humor"] },
+    { text: "I'm not high maintenance, you're just low effort.", cat: "crazy", tags: ["crazy","attitude","sarcasm"] },
+    { text: "I came. I saw. I forgot what I was doing. Retraced my steps. Got distracted.", cat: "crazy", tags: ["crazy","humor","relatable"] },
+    { text: "My superpower is making plans and then not going.", cat: "crazy", tags: ["crazy","humor","relatable"] },
+    { text: "I'm not a mess, I'm a work of abstract art.", cat: "crazy", tags: ["crazy","humor","attitude"] },
+
+    // Extra funny
+    { text: "I'm not sarcastic. I'm just fluent in smart.", cat: "funny", tags: ["humor","sarcasm"] },
+    { text: "Napping is my cardio.", cat: "funny", tags: ["humor","relatable"] },
+    { text: "I apologize for nothing I said when I was hungry.", cat: "funny", tags: ["humor","food","relatable"] },
+    { text: "My hobbies include eating and complaining about being full.", cat: "funny", tags: ["humor","food"] },
+    { text: "I don't always have a plan but when I do, nobody listens anyway.", cat: "funny", tags: ["humor","relatable"] },
+
+    // Extra romantic
+    { text: "You're my favourite reason to lose sleep.", cat: "romantic", tags: ["love","cute","night"] },
+    { text: "I would choose you in a hundred lifetimes.", cat: "romantic", tags: ["love","cute"] },
+    { text: "You had me at hello and you still have me.", cat: "romantic", tags: ["love","cute"] },
+    { text: "Loving you is the best decision I've ever made.", cat: "romantic", tags: ["love"] },
+    { text: "My favourite place is next to you.", cat: "romantic", tags: ["love","cute"] },
+
+    // Extra motivational
+    { text: "Doubt kills more dreams than failure ever will.", cat: "motivational", tags: ["motivation","courage"] },
+    { text: "Stay patient. Your breakthrough is coming.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Be so good they can't ignore you.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Progress, not perfection.", cat: "motivational", tags: ["motivation","success"] },
+    { text: "Hustle in silence and let success make the noise.", cat: "motivational", tags: ["motivation","success","boss"] },
+
+    // Extra attitude
+    { text: "I am the vibe I was looking for.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "Unbothered. Moisturized. Thriving.", cat: "attitude", tags: ["attitude","confidence","selfcare"] },
+    { text: "I don't need your approval to be me.", cat: "attitude", tags: ["attitude","confidence"] },
+    { text: "They said I couldn't. That's why I did.", cat: "attitude", tags: ["attitude","confidence","motivation"] },
+    { text: "Confidence is not 'they will like me.' It's 'I'll be fine if they don't.'", cat: "attitude", tags: ["attitude","confidence"] },
+
+    // Extra friendship
+    { text: "Real queens fix each other's crowns.", cat: "friendship", tags: ["friendship","attitude"] },
+    { text: "We don't need to talk every day to know we're forever.", cat: "friendship", tags: ["friendship","cute"] },
+    { text: "Thanks for being the person I can say anything to.", cat: "friendship", tags: ["friendship"] },
+    { text: "You're the friend I didn't know I needed.", cat: "friendship", tags: ["friendship","cute"] },
+    { text: "Cheese, wine, and good friends only get better with time.", cat: "friendship", tags: ["friendship","humor","food"] },
+
+    // Extra life
+    { text: "Some chapters just have to close.", cat: "life", tags: ["life"] },
+    { text: "Your life is your story — write it well.", cat: "life", tags: ["life","motivation"] },
+    { text: "Not every day will be good, but there's something good in every day.", cat: "life", tags: ["life","happiness","grateful"] },
+    { text: "Stop overthinking. You can't control everything.", cat: "life", tags: ["life","calm"] },
+    { text: "The good old days are happening right now.", cat: "life", tags: ["life","happiness"] },
+
+    // Extra angry
+    { text: "I'm not yelling. This is just my passionate voice.", cat: "angry", tags: ["angry","humor","sarcasm"] },
+    { text: "My tolerance for nonsense has officially expired.", cat: "angry", tags: ["angry","attitude"] },
+    { text: "Do not test me. I have a PhD in pettiness.", cat: "angry", tags: ["angry","humor","sarcasm"] },
+    { text: "I'm calm. This is my calm face.", cat: "angry", tags: ["angry","humor"] },
+    { text: "Return to sender. I don't have the energy for this.", cat: "angry", tags: ["angry","attitude"] },
+
+    // TGIF
+    { text: "Friday called. It said to stop working and start living.", cat: "tgif", tags: ["tgif","humor"] },
+    { text: "It's Friday! The second greatest F word ever.", cat: "tgif", tags: ["tgif","humor"] },
+    { text: "TGIF — Thank God I'm Fabulous.", cat: "tgif", tags: ["tgif","humor","attitude"] },
+    { text: "Friday is proof that the week has a happy ending.", cat: "tgif", tags: ["tgif"] },
+    { text: "Work hard. Play harder. It's Friday.", cat: "tgif", tags: ["tgif","motivation"] },
+    { text: "Cheers to the freakin' weekend.", cat: "tgif", tags: ["tgif","humor"] },
+    { text: "My Friday mood just walked in wearing a cape.", cat: "tgif", tags: ["tgif","humor"] },
+    { text: "The weekend is calling and I must go.", cat: "tgif", tags: ["tgif","travel","adventure"] },
+    { text: "See you on the other side of the weekend.", cat: "tgif", tags: ["tgif","humor"] },
+    { text: "Friday: the day my soul leaves the building.", cat: "tgif", tags: ["tgif","humor","relatable"] },
+
+    // Mother's Day
+    { text: "A mother's hug lasts long after she lets go.", cat: "mothers", tags: ["mothers","family","love"] },
+    { text: "Mom: the original superhero, no cape required.", cat: "mothers", tags: ["mothers","family"] },
+    { text: "Everything I am, I owe to my mother.", cat: "mothers", tags: ["mothers","family","grateful"] },
+    { text: "The world needs more moms like mine.", cat: "mothers", tags: ["mothers","family"] },
+    { text: "Motherhood: powered by love, fueled by coffee, sustained by wine.", cat: "mothers", tags: ["mothers","humor","coffee"] },
+    { text: "Behind every great kid is a great mom.", cat: "mothers", tags: ["mothers","family"] },
+    { text: "A mother is she who can take the place of all others but whose place no one else can take.", cat: "mothers", tags: ["mothers","family","love"] },
+    { text: "You are the reason I smile. Happy Mother's Day.", cat: "mothers", tags: ["mothers","family","love"] },
+    { text: "Mom: my first friend, my forever hero.", cat: "mothers", tags: ["mothers","family","friendship"] },
+    { text: "Thank you for the late nights, early mornings, and everything in between.", cat: "mothers", tags: ["mothers","family","grateful"] },
+
+    // Birthday
+    { text: "Another year older, another year wiser — or so the story goes.", cat: "birthday", tags: ["birthday","humor"] },
+    { text: "It's my birthday. Being normal is off the table.", cat: "birthday", tags: ["birthday","humor","crazy"] },
+    { text: "Age is just a number. Mine is unlisted.", cat: "birthday", tags: ["birthday","humor","attitude"] },
+    { text: "Today I am as old as I've ever been and as young as I'll ever be.", cat: "birthday", tags: ["birthday","life"] },
+    { text: "Cake is always a good idea on your birthday.", cat: "birthday", tags: ["birthday","food","humor"] },
+    { text: "Slay all day — it's my birthday.", cat: "birthday", tags: ["birthday","attitude","confidence"] },
+    { text: "Another trip around the sun and I'm still fabulous.", cat: "birthday", tags: ["birthday","attitude"] },
+    { text: "They say with age comes wisdom. I prefer the cake.", cat: "birthday", tags: ["birthday","humor","food"] },
+    { text: "Not older. Upgraded.", cat: "birthday", tags: ["birthday","attitude","humor"] },
+    { text: "Wishing myself a year full of laughter, love, and good vibes.", cat: "birthday", tags: ["birthday","happy"] },
+
+    // Morning
+    { text: "Rise up. Start fresh. See the bright opportunity in each new day.", cat: "morning", tags: ["morning","motivation"] },
+    { text: "Today is a new day. Make it count.", cat: "morning", tags: ["morning","motivation"] },
+    { text: "Good morning to everyone except my alarm.", cat: "morning", tags: ["morning","humor","relatable"] },
+    { text: "First I drink the coffee, then I do the things.", cat: "morning", tags: ["morning","coffee","humor"] },
+    { text: "Wake up. Be awesome. Repeat.", cat: "morning", tags: ["morning","motivation","attitude"] },
+    { text: "Every morning is a chance at a new beginning.", cat: "morning", tags: ["morning","motivation","life"] },
+    { text: "Good morning! Let your smile change the world.", cat: "morning", tags: ["morning","happiness"] },
+    { text: "Start each morning with a grateful heart.", cat: "morning", tags: ["morning","grateful"] },
+    { text: "Morning: the only time the day is still full of promise.", cat: "morning", tags: ["morning","life"] },
+    { text: "I'm not a morning person — I'm a coffee person who tolerates mornings.", cat: "morning", tags: ["morning","coffee","humor"] },
+
+    // Night
+    { text: "Goodnight world. I'll try again tomorrow.", cat: "night", tags: ["night","life","relatable"] },
+    { text: "Sleep is my love language.", cat: "night", tags: ["night","humor","relatable"] },
+    { text: "Night is the perfect canvas for dreams.", cat: "night", tags: ["night","dreams"] },
+    { text: "Late nights and good vibes.", cat: "night", tags: ["night","attitude"] },
+    { text: "The quieter the night, the louder my thoughts.", cat: "night", tags: ["night","life","relatable"] },
+    { text: "Sweet dreams are made of this — whatever 'this' is, I'm here for it.", cat: "night", tags: ["night","humor","dreams"] },
+    { text: "Goodnight. Tomorrow's problems are future me's business.", cat: "night", tags: ["night","humor","relatable"] },
+    { text: "The night is young. So am I. (In spirit.)", cat: "night", tags: ["night","humor"] },
+    { text: "Stars can't shine without darkness.", cat: "night", tags: ["night","motivation","life"] },
+    { text: "Logging off for the night. Be back tomorrow, hopefully recharged.", cat: "night", tags: ["night","relatable","humor"] },
+
+    // Success
+    { text: "Success is the best revenge.", cat: "success", tags: ["success","attitude","motivation"] },
+    { text: "I didn't come this far to tap out now.", cat: "success", tags: ["success","motivation","attitude"] },
+    { text: "The road to success is always under construction.", cat: "success", tags: ["success","life","humor"] },
+    { text: "Eat. Sleep. Grind. Repeat.", cat: "success", tags: ["success","motivation","boss"] },
+    { text: "Success doesn't just find you. You have to go out and get it.", cat: "success", tags: ["success","motivation"] },
+    { text: "I'm not lucky. I'm prepared.", cat: "success", tags: ["success","attitude","motivation"] },
+    { text: "Make moves in silence. Let your results do the talking.", cat: "success", tags: ["success","boss","attitude"] },
+    { text: "They want to see you do good — just not better than them.", cat: "success", tags: ["success","attitude","sarcasm"] },
+    { text: "Glow differently. Success looks good on you.", cat: "success", tags: ["success","confidence","attitude"] },
+    { text: "Your future is created by what you do today, not tomorrow.", cat: "success", tags: ["success","motivation"] },
+
+    // Self-Care
+    { text: "You can't pour from an empty cup. Take care of yourself first.", cat: "selfcare", tags: ["selfcare","life"] },
+    { text: "Protect your peace like it's your most prized possession.", cat: "selfcare", tags: ["selfcare","attitude","life"] },
+    { text: "Rest is not a reward. It's a requirement.", cat: "selfcare", tags: ["selfcare","life","relatable"] },
+    { text: "Invest in your mental health. It pays dividends forever.", cat: "selfcare", tags: ["selfcare","motivation"] },
+    { text: "You are allowed to be a masterpiece and a work in progress simultaneously.", cat: "selfcare", tags: ["selfcare","life","motivation"] },
+    { text: "Bubble baths, good books, and zero drama.", cat: "selfcare", tags: ["selfcare","humor"] },
+    { text: "Saying no is a full sentence. No explanation needed.", cat: "selfcare", tags: ["selfcare","attitude"] },
+    { text: "Taking care of yourself is an act of love.", cat: "selfcare", tags: ["selfcare","love","life"] },
+    { text: "Glow from the inside out.", cat: "selfcare", tags: ["selfcare","confidence"] },
+    { text: "Choose yourself — not out of arrogance, but out of self-respect.", cat: "selfcare", tags: ["selfcare","attitude","confidence"] },
+
+    // Monday
+    { text: "Monday again? Bold move, universe.", cat: "monday", tags: ["monday","humor","relatable"] },
+    { text: "Monday: a fresh start dressed in the world's worst outfit.", cat: "monday", tags: ["monday","humor"] },
+    { text: "I can do this. It's just Monday. (I lied. Send help.)", cat: "monday", tags: ["monday","humor","relatable"] },
+    { text: "New week, same me — but caffeinated.", cat: "monday", tags: ["monday","coffee","humor"] },
+    { text: "Monday called. I let it go to voicemail.", cat: "monday", tags: ["monday","humor","relatable"] },
+    { text: "Treating Monday like it personally wronged me.", cat: "monday", tags: ["monday","humor","angry"] },
+    { text: "Dear Monday, nobody asked for you.", cat: "monday", tags: ["monday","humor","angry"] },
+    { text: "May your coffee be strong and your Monday be short.", cat: "monday", tags: ["monday","coffee","humor"] },
+    { text: "Monday is just a reminder that the weekend can't last forever.", cat: "monday", tags: ["monday","life","humor"] },
+    { text: "On Mondays I wear my resting 'why is this a thing' face.", cat: "monday", tags: ["monday","humor","relatable"] },
+
+    // Travel
+    { text: "Not all who wander are lost — some just forgot Google Maps.", cat: "travel", tags: ["travel","humor","adventure"] },
+    { text: "My passport is my most important accessory.", cat: "travel", tags: ["travel","adventure"] },
+    { text: "Travel is the only thing you buy that makes you richer.", cat: "travel", tags: ["travel","life","motivation"] },
+    { text: "Work, save, travel, repeat.", cat: "travel", tags: ["travel","life","motivation"] },
+    { text: "Let's find some beautiful place to get lost.", cat: "travel", tags: ["travel","adventure","romantic"] },
+    { text: "Jobs fill your pocket. Adventures fill your soul.", cat: "travel", tags: ["travel","life","adventure"] },
+    { text: "Collect memories, not things. (Fridge magnets are memories.)", cat: "travel", tags: ["travel","humor","life"] },
+    { text: "On my way to everywhere.", cat: "travel", tags: ["travel","adventure","attitude"] },
+    { text: "The world is a book and those who do not travel read only one page.", cat: "travel", tags: ["travel","life"] },
+    { text: "Take only memories. Leave only footprints.", cat: "travel", tags: ["travel","life","adventure"] },
+
+    // Food
+    { text: "I'm on a seafood diet. I see food and I eat it.", cat: "food", tags: ["food","humor"] },
+    { text: "Good food = good mood. It's science.", cat: "food", tags: ["food","humor","life"] },
+    { text: "Life is short. Eat the dessert first.", cat: "food", tags: ["food","humor","life"] },
+    { text: "My love language is food.", cat: "food", tags: ["food","romantic","humor"] },
+    { text: "In pizza we trust.", cat: "food", tags: ["food","humor","relatable"] },
+    { text: "Food is my happy place.", cat: "food", tags: ["food","happiness"] },
+    { text: "A balanced diet is chocolate in both hands.", cat: "food", tags: ["food","humor"] },
+    { text: "You had me at 'I made food'.", cat: "food", tags: ["food","romantic","humor"] },
+    { text: "I don't stress eat. I eat to prepare for the stress.", cat: "food", tags: ["food","humor","relatable"] },
+    { text: "All you need is love. And maybe tacos.", cat: "food", tags: ["food","humor","romantic"] },
+
+    // Workout
+    { text: "Sweat now. Shine later.", cat: "workout", tags: ["workout","motivation","success"] },
+    { text: "Train insane or remain the same.", cat: "workout", tags: ["workout","motivation","attitude"] },
+    { text: "I workout because punching people is frowned upon.", cat: "workout", tags: ["workout","humor","angry"] },
+    { text: "Your only competition is the person you were yesterday.", cat: "workout", tags: ["workout","motivation","success"] },
+    { text: "Sore today. Strong tomorrow.", cat: "workout", tags: ["workout","motivation"] },
+    { text: "I don't sweat. I sparkle.", cat: "workout", tags: ["workout","humor","attitude"] },
+    { text: "Gym: where I go to throw my problems onto the barbell.", cat: "workout", tags: ["workout","humor","life"] },
+    { text: "One workout at a time. One day at a time.", cat: "workout", tags: ["workout","motivation","life"] },
+    { text: "Push yourself because no one else is going to do your burpees.", cat: "workout", tags: ["workout","humor","motivation"] },
+    { text: "Your body hears everything your mind says. Stay positive.", cat: "workout", tags: ["workout","motivation","selfcare"] },
+
+    // Christmas
+    { text: "It's the most wonderful time of the year.", cat: "christmas", tags: ["christmas","happiness"] },
+    { text: "All I want for Christmas is everything on my list.", cat: "christmas", tags: ["christmas","humor"] },
+    { text: "Sleigh all day.", cat: "christmas", tags: ["christmas","humor","attitude"] },
+    { text: "Tis the season to be grateful, merry, and a little extra.", cat: "christmas", tags: ["christmas","grateful","humor"] },
+    { text: "Let it snow. Let it snow. Let it snow. (Just not on my car.)", cat: "christmas", tags: ["christmas","humor"] },
+    { text: "May your Christmas be merry and your Wi-Fi strong.", cat: "christmas", tags: ["christmas","humor","relatable"] },
+    { text: "Jingle all the way or don't jingle at all.", cat: "christmas", tags: ["christmas","humor","attitude"] },
+    { text: "Christmas: the only time eating cookies for breakfast is acceptable.", cat: "christmas", tags: ["christmas","food","humor"] },
+    { text: "Home for the holidays and pretending to be a functional adult.", cat: "christmas", tags: ["christmas","humor","relatable","family"] },
+    { text: "Warm wishes, cold hands, full heart.", cat: "christmas", tags: ["christmas","life","love"] },
+
+    // New Year
+    { text: "New year. Same savage me — but upgraded.", cat: "newyear", tags: ["newyear","attitude","humor"] },
+    { text: "Cheers to new chapters and better adventures.", cat: "newyear", tags: ["newyear","life","motivation"] },
+    { text: "365 new chances start now.", cat: "newyear", tags: ["newyear","motivation"] },
+    { text: "Out with the old. In with the bold.", cat: "newyear", tags: ["newyear","attitude","motivation"] },
+    { text: "New year who dis?", cat: "newyear", tags: ["newyear","humor","crazy"] },
+    { text: "May the new year bring you peace, joy, and an actual sleep schedule.", cat: "newyear", tags: ["newyear","humor","life"] },
+    { text: "I'm not making resolutions. I'm making moves.", cat: "newyear", tags: ["newyear","attitude","motivation","boss"] },
+    { text: "Here's to the nights that turned into mornings.", cat: "newyear", tags: ["newyear","life","friendship"] },
+    { text: "The new year is a blank book. Be a great author.", cat: "newyear", tags: ["newyear","motivation","life"] },
+    { text: "Same me. New energy. Let's go.", cat: "newyear", tags: ["newyear","motivation","attitude"] },
+
+    // Heartbreak
+    { text: "Healing is not linear. Be patient with yourself.", cat: "heartbreak", tags: ["heartbreak","selfcare","life"] },
+    { text: "You didn't lose a good person. You lost a person who was wrong for you.", cat: "heartbreak", tags: ["heartbreak","life","motivation"] },
+    { text: "Sometimes good things fall apart so better things can fall together.", cat: "heartbreak", tags: ["heartbreak","life","motivation"] },
+    { text: "I'm not bitter. I'm just better without you.", cat: "heartbreak", tags: ["heartbreak","attitude"] },
+    { text: "Crying is just your eyes sweating out the feelings.", cat: "heartbreak", tags: ["heartbreak","humor","relatable"] },
+    { text: "The comeback is always stronger than the setback.", cat: "heartbreak", tags: ["heartbreak","motivation","strength"] },
+    { text: "You can miss someone and still know they were wrong for you.", cat: "heartbreak", tags: ["heartbreak","life"] },
+    { text: "Delete their number. Not from your phone. From your energy.", cat: "heartbreak", tags: ["heartbreak","attitude","selfcare"] },
+    { text: "What hurt you once won't break you forever.", cat: "heartbreak", tags: ["heartbreak","strength","life"] },
+    { text: "My heart said no. My attitude said watch me thrive anyway.", cat: "heartbreak", tags: ["heartbreak","attitude","motivation"] },
+
+    // Boss Mode
+    { text: "Building my empire one Monday at a time.", cat: "boss", tags: ["boss","motivation","success"] },
+    { text: "CEO of my own life.", cat: "boss", tags: ["boss","attitude","success"] },
+    { text: "I don't follow the path. I make it.", cat: "boss", tags: ["boss","attitude","motivation"] },
+    { text: "She believed she could, so she did.", cat: "boss", tags: ["boss","motivation","success","attitude"] },
+    { text: "Delegating like a pro. Doing the rest even better.", cat: "boss", tags: ["boss","success","humor"] },
+    { text: "My work ethic is not up for discussion.", cat: "boss", tags: ["boss","attitude","success"] },
+    { text: "I don't need a title to lead.", cat: "boss", tags: ["boss","attitude","motivation"] },
+    { text: "Stay focused and extra sparkly.", cat: "boss", tags: ["boss","attitude","motivation"] },
+    { text: "Think like a queen. A queen is not afraid to fail.", cat: "boss", tags: ["boss","attitude","motivation","confidence"] },
+    { text: "Soft life? No. Boss life.", cat: "boss", tags: ["boss","attitude","humor"] },
+
+    // Grateful
+    { text: "Gratitude turns what we have into enough.", cat: "grateful", tags: ["grateful","life"] },
+    { text: "Count your blessings, not your problems.", cat: "grateful", tags: ["grateful","life","motivation"] },
+    { text: "Thankful for the small things that turn out to be big things.", cat: "grateful", tags: ["grateful","life"] },
+    { text: "Wake up and be thankful. Not everyone got to.", cat: "grateful", tags: ["grateful","morning","life"] },
+    { text: "A grateful heart is a magnet for miracles.", cat: "grateful", tags: ["grateful","motivation","life"] },
+    { text: "Less scrolling. More noticing how good life actually is.", cat: "grateful", tags: ["grateful","life","relatable"] },
+    { text: "I am thankful for the difficult times — they made me stronger.", cat: "grateful", tags: ["grateful","life","strength"] },
+    { text: "Find joy in the ordinary. Extraordinary will follow.", cat: "grateful", tags: ["grateful","happiness","life"] },
+    { text: "Thank you for today. Even the messy parts.", cat: "grateful", tags: ["grateful","life"] },
+    { text: "Blessed. Grateful. Still thriving.", cat: "grateful", tags: ["grateful","attitude","life"] },
   ];
 
   // All unique tags
@@ -942,13 +1203,18 @@
   const labels = {
     funny:'😂 Funny', romantic:'💕 Romantic', motivational:'⚡ Motivational',
     attitude:'😎 Attitude', friendship:'🤝 Friendship', life:'🌿 Life',
-    angry:'🔥 Angry', crazy:'🤪 Crazy'
+    angry:'🔥 Angry', crazy:'🤪 Crazy', tgif:'🎉 TGIF', mothers:'🌸 Mother\'s Day',
+    birthday:'🎂 Birthday', morning:'☀️ Morning', night:'🌙 Night',
+    success:'🏆 Success', selfcare:'🧘 Self-Care', monday:'😩 Monday',
+    travel:'✈️ Travel', food:'🍕 Foodie', workout:'💪 Workout',
+    christmas:'🎄 Christmas', newyear:'🥂 New Year', heartbreak:'💔 Heartbreak',
+    boss:'👑 Boss Mode', grateful:'🙏 Grateful'
   };
 
   function buildPopularGrid() {
     const pool = activeTag
       ? quotes.filter(q => (q.tags||[]).includes(activeTag))
-      : quotes.filter(q => ['funny','romantic','motivational','attitude','friendship','life','angry','crazy']
+      : quotes.filter(q => ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful']
           .map((c,i) => quotes.filter(x => x.cat===c)[i % quotes.filter(x=>x.cat===c).length])
         ).slice(0,12);
 
@@ -973,7 +1239,7 @@
   }
 
   function getDiverseSample(n) {
-    const cats = ['funny','romantic','motivational','attitude','friendship','life','angry','crazy'];
+    const cats = ['funny','romantic','motivational','attitude','friendship','life','angry','crazy','tgif','mothers','birthday','morning','night','success','selfcare','monday','travel','food','workout','christmas','newyear','heartbreak','boss','grateful'];
     const result = [];
     const usedIdx = {};
     cats.forEach(c => usedIdx[c] = []);
