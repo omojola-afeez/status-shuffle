@@ -588,7 +588,403 @@
       .shuffle-section { padding: 3rem 1.5rem; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
-  </style>
+
+    /* ═══════════════════════════════════════
+       IMAGE CREATOR
+    ═══════════════════════════════════════ */
+    #image-creator { background: #f0ede8; }
+
+    .creator-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media(max-width:800px){ .creator-layout { grid-template-columns: 1fr; } }
+
+    /* Canvas preview */
+    .creator-canvas-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+      background: #1a1814;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #quote-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+
+    /* Controls panel */
+    .creator-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+    .ctrl-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .ctrl-group textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      background: #fff;
+      color: var(--ink);
+      transition: border-color 0.2s;
+    }
+    .ctrl-group textarea:focus { outline: none; border-color: var(--accent); }
+
+    /* Background presets */
+    .bg-presets {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.5rem;
+    }
+    .bg-swatch {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform 0.15s, border-color 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-swatch:hover { transform: scale(1.08); }
+    .bg-swatch.active { border-color: var(--accent); }
+
+    /* Font style pills */
+    .font-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .font-pill {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.15s;
+      color: var(--ink);
+    }
+    .font-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Text color swatches */
+    .text-colors {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .text-color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .text-color-swatch:hover { transform: scale(1.15); }
+    .text-color-swatch.active { border-color: var(--accent); }
+
+    /* Size slider */
+    .ctrl-group input[type=range] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    /* Upload background */
+    .upload-bg-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1.5px dashed var(--border);
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .upload-bg-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Action buttons */
+    .creator-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .btn-download-img {
+      flex: 1;
+      padding: 0.9rem 1.4rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .btn-download-img:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-use-current {
+      flex: 1;
+      padding: 0.9rem 1.4rem;
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-use-current:hover { background: var(--accent-light); }
+
+    /* Share row inside creator */
+    .creator-share-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+  
+    /* ── VIDEO CREATOR ── */
+    .videocreator-section {
+      padding: 5rem 2rem;
+      background: var(--ink);
+      color: #fff;
+    }
+    .videocreator-section .section-eyebrow { color: var(--accent); }
+    .videocreator-section .section-title { color: #fff; }
+    .vc-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      align-items: start;
+    }
+    @media(max-width:860px){ .vc-layout { grid-template-columns: 1fr; } }
+
+    /* Preview canvas wrapper */
+    .vc-preview-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .vc-canvas-container {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 9/16;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      background: #111;
+    }
+    #vc-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .vc-recording-badge {
+      display: none;
+      position: absolute;
+      top: 12px; right: 12px;
+      background: #e53e3e;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.1em;
+      animation: pulse-rec 1s infinite;
+    }
+    @keyframes pulse-rec { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* Controls panel */
+    .vc-controls { display: flex; flex-direction: column; gap: 1.4rem; }
+    .vc-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.6rem;
+    }
+    .vc-quote-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+      transition: border 0.2s;
+    }
+    .vc-quote-input:focus { outline: none; border-color: var(--accent); }
+    .vc-bg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+    .vc-bg-swatch {
+      aspect-ratio: 9/16;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.2s, transform 0.15s;
+      overflow: hidden;
+      position: relative;
+    }
+    .vc-bg-swatch:hover { transform: scale(1.06); }
+    .vc-bg-swatch.active { border-color: var(--accent); }
+    .vc-bg-swatch canvas { width: 100%; height: 100%; display: block; }
+    .vc-anim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .vc-anim-btn {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+    }
+    .vc-anim-btn:hover { background: rgba(255,255,255,0.13); color: #fff; }
+    .vc-anim-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .vc-duration-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .vc-dur-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      border-radius: 8px;
+      padding: 0.5rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+    }
+    .vc-dur-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .vc-action-row { display: flex; flex-direction: column; gap: 0.75rem; }
+    .vc-btn-preview {
+      width: 100%;
+      padding: 0.85rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .vc-btn-preview:hover { background: rgba(255,255,255,0.18); }
+    .vc-btn-record {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: inherit;
+    }
+    .vc-btn-record:hover { opacity: 0.88; }
+    .vc-btn-record:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .vc-make-btn {
+      background: linear-gradient(135deg, var(--accent), #e07b3a) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+      font-weight: 600;
+    }
+    .vc-make-btn:hover {
+      background: var(--accent) !important;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+      .vc-layout { flex-direction: column; align-items: center; }
+      .vc-canvas-container canvas { width: 100% !important; height: auto !important; max-width: 300px; }
+      .vc-controls { width: 100%; }
+      .vc-bg-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .vc-progress {
+      display: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .vc-progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+    .vc-status {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+    }
+    .vc-use-shuffled {
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+      text-decoration: underline;
+    }
+</style>
 </head>
 <body>
 
@@ -598,6 +994,7 @@
   <ul class="nav-links">
     <li><a href="#categories">Categories</a></li>
     <li><a href="#shuffle">Shuffle</a></li>
+      <li><a href="#video-creator">Create Video</a></li>
     <li><a href="#popular">Popular</a></li>
     <li><a href="#shuffle" class="nav-cta">Try It Free</a></li>
   </ul>
@@ -749,6 +1146,7 @@
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem;">
     <button class="btn-shuffle" onclick="shuffleQuote()">⟳ &nbsp;Shuffle</button>
     <button class="copy-btn" onclick="copyQuote()">📋 Copy</button>
+    <button class="copy-btn" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);" onclick="vcOpenWithQuote(document.getElementById('shuffled-quote').textContent)">🎬 Make Video</button>
   </div>
   <div class="share-row" id="shuffler-share">
     <span class="share-label">Share:</span>
@@ -788,7 +1186,170 @@
   <div class="quotes-grid" id="quotes-grid"></div>
 </section>
 
+
+<!-- ═══════════════════════════════════════
+     IMAGE CREATOR SECTION
+════════════════════════════════════════ -->
+<section class="section" id="image-creator">
+  <div class="section-header">
+    <p class="section-eyebrow">Create & Share</p>
+    <h2 class="section-title">Quote Image Creator</h2>
+    <p style="color:var(--muted);max-width:520px;margin:0 auto;">Design a beautiful quote card and download it directly to your phone or share it anywhere.</p>
+  </div>
+
+  <div class="creator-layout">
+
+    <!-- LEFT: Canvas Preview -->
+    <div>
+      <div class="creator-canvas-wrap">
+        <canvas id="quote-canvas" width="1080" height="1080"></canvas>
+      </div>
+      <div style="margin-top:1.2rem;" class="creator-actions">
+        <button class="btn-use-current" onclick="useCurrentQuote()">⟳ Use Current Quote</button>
+        <button class="btn-download-img" onclick="downloadQuoteImage()">⬇ Download PNG</button>
+      </div>
+      <div style="margin-top:1rem;">
+        <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Share image</p>
+        <div class="creator-share-row" style="justify-content:center;">
+          <button class="share-btn share-whatsapp" onclick="shareCreatorImage('whatsapp')" title="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+          <button class="share-btn share-twitter" onclick="shareCreatorImage('twitter')" title="Twitter/X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 5.858 5.451-5.858zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </button>
+          <button class="share-btn share-facebook" onclick="shareCreatorImage('facebook')" title="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+          <button class="share-btn share-instagram" onclick="shareCreatorImage('instagram')" title="Save & open Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </button>
+          <button class="share-btn share-tiktok" onclick="shareCreatorImage('tiktok')" title="Save & open TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Controls -->
+    <div class="creator-controls">
+
+      <!-- Quote Text -->
+      <div class="ctrl-group">
+        <label>Quote Text</label>
+        <textarea id="creator-text" placeholder="Type your quote here..." oninput="renderCanvas()">The best is yet to come.</textarea>
+      </div>
+
+      <!-- Background -->
+      <div class="ctrl-group">
+        <label>Background</label>
+        <div class="bg-presets" id="bg-presets"></div>
+        <div style="margin-top:0.6rem;">
+          <label for="upload-bg" class="upload-bg-btn">
+            📁 Upload your own background image
+            <input type="file" id="upload-bg" accept="image/*" style="display:none;" onchange="loadUserBg(event)">
+          </label>
+        </div>
+      </div>
+
+      <!-- Font Style -->
+      <div class="ctrl-group">
+        <label>Font Style</label>
+        <div class="font-pills" id="font-pills"></div>
+      </div>
+
+      <!-- Text Color -->
+      <div class="ctrl-group">
+        <label>Text Color</label>
+        <div class="text-colors" id="text-colors"></div>
+      </div>
+
+      <!-- Text Size -->
+      <div class="ctrl-group">
+        <label>Text Size — <span id="size-val">42</span>px</label>
+        <input type="range" id="text-size" min="24" max="72" value="42" oninput="document.getElementById('size-val').textContent=this.value; renderCanvas()">
+      </div>
+
+      <!-- Watermark toggle -->
+      <div class="ctrl-group" style="display:flex;align-items:center;gap:0.6rem;">
+        <input type="checkbox" id="show-watermark" checked onchange="renderCanvas()" style="width:16px;height:16px;accent-color:var(--accent);">
+        <label style="margin:0;text-transform:none;font-size:0.9rem;color:var(--ink);font-weight:400;">Show "StatusShuffle" watermark</label>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
+
+<!-- ═══════════════════════════════
+     VIDEO CREATOR SECTION
+════════════════════════════════ -->
+<section class="videocreator-section" id="video-creator">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <p class="section-eyebrow">Create &amp; Share</p>
+    <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:2rem;">Quote Video Creator</h2>
+    <p style="color:rgba(255,255,255,0.5);max-width:500px;margin:0.75rem auto 0;font-size:0.95rem;">Turn any quote into a shareable 9:16 video for TikTok, Reels &amp; WhatsApp Status. No app needed.</p>
+  </div>
+  <div class="vc-layout">
+
+    <!-- LEFT: Preview -->
+    <div class="vc-preview-wrap">
+      <div class="vc-canvas-container">
+        <canvas id="vc-canvas" width="540" height="960"></canvas>
+        <div class="vc-recording-badge" id="vc-rec-badge">● REC</div>
+      </div>
+      <p class="vc-status" id="vc-status">Choose a background and hit Preview</p>
+      <div class="vc-progress" id="vc-progress"><div class="vc-progress-bar" id="vc-progress-bar"></div></div>
+    </div>
+
+    <!-- RIGHT: Controls -->
+    <div class="vc-controls">
+
+      <!-- Quote text -->
+      <div class="vc-group">
+        <label>Quote Text</label>
+        <textarea class="vc-quote-input" id="vc-quote-text" placeholder="Type your quote here..."></textarea>
+        <button class="vc-use-shuffled" onclick="vcUseShuffled()">↑ Use current shuffled quote</button>
+      </div>
+
+      <!-- Background -->
+      <div class="vc-group">
+        <label>Background</label>
+        <div class="vc-bg-grid" id="vc-bg-grid"></div>
+      </div>
+
+      <!-- Animation -->
+      <div class="vc-group">
+        <label>Text Animation</label>
+        <div class="vc-anim-grid">
+          <button class="vc-anim-btn active" data-anim="fade" onclick="vcSetAnim(this)">✦ Fade In</button>
+          <button class="vc-anim-btn" data-anim="typewriter" onclick="vcSetAnim(this)">⌨ Typewriter</button>
+          <button class="vc-anim-btn" data-anim="slide" onclick="vcSetAnim(this)">↑ Slide Up</button>
+          <button class="vc-anim-btn" data-anim="zoom" onclick="vcSetAnim(this)">⊕ Zoom In</button>
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div class="vc-group">
+        <label>Video Duration</label>
+        <div class="vc-duration-row">
+          <button class="vc-dur-btn active" data-dur="5" onclick="vcSetDur(this)">5s</button>
+          <button class="vc-dur-btn" data-dur="8" onclick="vcSetDur(this)">8s</button>
+          <button class="vc-dur-btn" data-dur="10" onclick="vcSetDur(this)">10s</button>
+          <button class="vc-dur-btn" data-dur="15" onclick="vcSetDur(this)">15s</button>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="vc-action-row">
+        <button class="vc-btn-preview" onclick="vcPreview()">▶ Preview Animation</button>
+        <button class="vc-btn-record" id="vc-record-btn" onclick="vcRecord()">⬇ Download Video</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <div class="cta-banner">
   <h2>Never run out of things to say.</h2>
   <p>New quotes added every day. Bookmark this page and always have the perfect status ready.</p>
@@ -1590,6 +2151,7 @@
           <div class="quote-card-text">"${q.text}"</div>
           <div class="quote-card-actions">
             <button class="icon-btn" onclick="copyText('${safe}')">📋 Copy</button>
+            <button class="icon-btn vc-make-btn" onclick="vcOpenWithQuote('${safe}')" title="Make Video">🎬 Video</button>
             <button class="icon-btn share-btn-sm share-whatsapp" onclick="shareText('${safe}','whatsapp')" title="WhatsApp">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </button>
@@ -1634,6 +2196,420 @@
   shuffleQuote();
 
   // ── PWA: Service Worker ──
+
+  // ══════════════════════════════════════════
+  //  VIDEO CREATOR ENGINE
+  // ══════════════════════════════════════════
+  const vcCanvas = document.getElementById('vc-canvas');
+  const vcCtx    = vcCanvas.getContext('2d');
+  const W = 540, H = 960;
+
+  // ── Backgrounds ──
+  const vcBackgrounds = [
+    { label:'Sunset',    type:'gradient', colors:['#ff6b6b','#feca57','#ff9f43'] },
+    { label:'Ocean',     type:'gradient', colors:['#0f3460','#16213e','#0f3460'] },
+    { label:'Rose Gold', type:'gradient', colors:['#f7797d','#FBD786','#C6FFDD'] },
+    { label:'Midnight',  type:'gradient', colors:['#141e30','#243b55','#141e30'] },
+    { label:'Forest',    type:'gradient', colors:['#134e5e','#71b280','#134e5e'] },
+    { label:'Lavender',  type:'gradient', colors:['#7f7fd5','#86a8e7','#91eae4'] },
+    { label:'Fire',      type:'gradient', colors:['#f12711','#f5af19','#f12711'] },
+    { label:'Aurora',    type:'gradient', colors:['#00c6ff','#0072ff','#a855f7'] },
+    { label:'Earth',     type:'nature',   colors:['#2d5016','#4a7c59','#8fbc8f'] },
+    { label:'Desert',    type:'nature',   colors:['#c8622a','#e8a87c','#f7f5f0'] },
+    { label:'Deep Sea',  type:'nature',   colors:['#023e8a','#0077b6','#00b4d8'] },
+    { label:'Dusk',      type:'nature',   colors:['#2d1b69','#7c3aed','#f59e0b'] },
+  ];
+
+  let vcSelectedBg   = 0;
+  let vcSelectedAnim = 'fade';
+  let vcDuration     = 5;
+  let vcAnimFrame    = null;
+  let vcMediaRec     = null;
+
+  // ── Draw background onto canvas ──
+  function vcDrawBg(ctx, bg, w, h) {
+    const grd = ctx.createLinearGradient(0, 0, w * 0.3, h);
+    const cols = bg.colors;
+    grd.addColorStop(0,   cols[0]);
+    grd.addColorStop(0.5, cols[1]);
+    grd.addColorStop(1,   cols[2]);
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+
+    if (bg.type === 'nature') {
+      // Add subtle texture circles for nature feel
+      ctx.save();
+      ctx.globalAlpha = 0.08;
+      for (let i = 0; i < 6; i++) {
+        const r = 80 + i * 60;
+        const cx = w * 0.8, cy = h * 0.2;
+        const rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        rg.addColorStop(0, '#fff');
+        rg.addColorStop(1, 'transparent');
+        ctx.fillStyle = rg;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    // Always add soft vignette
+    const vig = ctx.createRadialGradient(w/2, h/2, h*0.2, w/2, h/2, h*0.85);
+    vig.addColorStop(0, 'transparent');
+    vig.addColorStop(1, 'rgba(0,0,0,0.45)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  // ── Wrap text ──
+  function vcWrapText(ctx, text, maxW, lineH, fontSize) {
+    ctx.font = `italic ${fontSize}px 'Playfair Display', Georgia, serif`;
+    const words = text.split(' ');
+    const lines = [];
+    let line = '';
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxW && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  // ── Draw full static frame ──
+  function vcDrawFrame(text, alpha, animType, progress) {
+    vcDrawBg(vcCtx, vcBackgrounds[vcSelectedBg], W, H);
+
+    // Decorative top line
+    vcCtx.save();
+    vcCtx.globalAlpha = alpha * 0.6;
+    vcCtx.strokeStyle = 'rgba(255,255,255,0.5)';
+    vcCtx.lineWidth = 1;
+    vcCtx.beginPath();
+    vcCtx.moveTo(W*0.25, H*0.12);
+    vcCtx.lineTo(W*0.75, H*0.12);
+    vcCtx.stroke();
+    vcCtx.restore();
+
+    // Opening quote mark
+    vcCtx.save();
+    vcCtx.globalAlpha = alpha * 0.25;
+    vcCtx.font = `bold 180px Georgia, serif`;
+    vcCtx.fillStyle = '#fff';
+    vcCtx.fillText('"', W*0.1, H*0.32);
+    vcCtx.restore();
+
+    // Quote text with animation
+    const fontSize = text.length > 120 ? 26 : text.length > 80 ? 30 : 36;
+    const lines = vcWrapText(vcCtx, text, W * 0.78, fontSize * 1.5, fontSize);
+    const totalH = lines.length * fontSize * 1.6;
+    const startY = (H - totalH) / 2;
+
+    vcCtx.font = `italic ${fontSize}px 'Playfair Display', Georgia, serif`;
+    vcCtx.textAlign = 'center';
+
+    lines.forEach((line, i) => {
+      let x = W / 2, y = startY + i * fontSize * 1.6;
+      let a = alpha;
+
+      if (animType === 'slide') {
+        const slideOffset = (1 - progress) * 60;
+        y += slideOffset * (1 - Math.min(progress * 2, 1));
+        a = alpha;
+      } else if (animType === 'zoom') {
+        const scale = 0.6 + progress * 0.4;
+        vcCtx.save();
+        vcCtx.translate(W/2, y);
+        vcCtx.scale(scale, scale);
+        vcCtx.globalAlpha = alpha;
+        vcCtx.shadowColor = 'rgba(0,0,0,0.6)';
+        vcCtx.shadowBlur = 18;
+        vcCtx.fillStyle = '#fff';
+        vcCtx.fillText(line, 0, 0);
+        vcCtx.restore();
+        return;
+      } else if (animType === 'typewriter') {
+        // handled separately
+      }
+
+      vcCtx.save();
+      vcCtx.globalAlpha = a;
+      vcCtx.shadowColor = 'rgba(0,0,0,0.7)';
+      vcCtx.shadowBlur = 20;
+      vcCtx.fillStyle = '#fff';
+      vcCtx.fillText(line, x, y);
+      vcCtx.restore();
+    });
+
+    // Bottom branding
+    vcCtx.save();
+    vcCtx.globalAlpha = alpha * 0.7;
+    vcCtx.font = `500 22px 'DM Sans', sans-serif`;
+    vcCtx.fillStyle = 'rgba(255,255,255,0.8)';
+    vcCtx.textAlign = 'center';
+    vcCtx.fillText('— StatusShuffle', W/2, H*0.88);
+    vcCtx.restore();
+
+    // Bottom decorative line
+    vcCtx.save();
+    vcCtx.globalAlpha = alpha * 0.4;
+    vcCtx.strokeStyle = 'rgba(255,255,255,0.5)';
+    vcCtx.lineWidth = 1;
+    vcCtx.beginPath();
+    vcCtx.moveTo(W*0.35, H*0.91);
+    vcCtx.lineTo(W*0.65, H*0.91);
+    vcCtx.stroke();
+    vcCtx.restore();
+
+    vcCtx.textAlign = 'left'; // reset
+  }
+
+  // ── Typewriter draw ──
+  function vcDrawTypewriter(text, charCount) {
+    vcDrawBg(vcCtx, vcBackgrounds[vcSelectedBg], W, H);
+
+    vcCtx.save();
+    vcCtx.globalAlpha = 0.25;
+    vcCtx.font = `bold 180px Georgia, serif`;
+    vcCtx.fillStyle = '#fff';
+    vcCtx.fillText('"', W*0.1, H*0.32);
+    vcCtx.restore();
+
+    const partial = text.slice(0, charCount);
+    const fontSize = text.length > 120 ? 26 : text.length > 80 ? 30 : 36;
+    const allLines = vcWrapText(vcCtx, text, W * 0.78, fontSize * 1.5, fontSize);
+    const totalH = allLines.length * fontSize * 1.6;
+    const startY = (H - totalH) / 2;
+
+    // figure out which chars belong to which lines
+    let rendered = 0;
+    vcCtx.font = `italic ${fontSize}px 'Playfair Display', Georgia, serif`;
+    vcCtx.textAlign = 'center';
+    allLines.forEach((line, i) => {
+      const y = startY + i * fontSize * 1.6;
+      if (rendered >= charCount) return;
+      const lineChars = Math.min(line.length, charCount - rendered);
+      const display = line.slice(0, lineChars);
+      rendered += line.length;
+      vcCtx.save();
+      vcCtx.globalAlpha = 1;
+      vcCtx.shadowColor = 'rgba(0,0,0,0.7)';
+      vcCtx.shadowBlur = 20;
+      vcCtx.fillStyle = '#fff';
+      vcCtx.fillText(display, W/2, y);
+      vcCtx.restore();
+    });
+
+    // blinking cursor
+    if (charCount < text.length) {
+      vcCtx.save();
+      vcCtx.globalAlpha = Math.sin(Date.now() / 200) > 0 ? 1 : 0;
+      vcCtx.fillStyle = '#fff';
+      vcCtx.font = `italic ${fontSize}px Georgia, serif`;
+      vcCtx.fillText('|', W/2 + 4, startY);
+      vcCtx.restore();
+    }
+
+    vcCtx.save();
+    vcCtx.globalAlpha = 0.7;
+    vcCtx.font = `500 22px 'DM Sans', sans-serif`;
+    vcCtx.fillStyle = 'rgba(255,255,255,0.8)';
+    vcCtx.textAlign = 'center';
+    vcCtx.fillText('— StatusShuffle', W/2, H*0.88);
+    vcCtx.restore();
+    vcCtx.textAlign = 'left';
+  }
+
+  // ── Animate preview ──
+  function vcAnimate(text, anim, dur, onDone) {
+    if (vcAnimFrame) cancelAnimationFrame(vcAnimFrame);
+    const start = performance.now();
+    const totalMs = dur * 1000;
+
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / totalMs, 1);
+
+      if (anim === 'fade') {
+        const alpha = progress < 0.15 ? progress / 0.15
+                    : progress > 0.85 ? (1 - progress) / 0.15
+                    : 1;
+        vcDrawFrame(text, alpha, 'fade', progress);
+      } else if (anim === 'slide') {
+        const alpha = progress < 0.15 ? progress / 0.15 : 1;
+        vcDrawFrame(text, alpha, 'slide', Math.min(progress / 0.3, 1));
+      } else if (anim === 'zoom') {
+        const alpha = progress < 0.15 ? progress / 0.15 : 1;
+        vcDrawFrame(text, alpha, 'zoom', Math.min(progress / 0.4, 1));
+      } else if (anim === 'typewriter') {
+        const charProgress = Math.min(progress / 0.7, 1);
+        const charCount = Math.floor(charProgress * text.length);
+        vcDrawTypewriter(text, charCount);
+      }
+
+      if (progress < 1) {
+        vcAnimFrame = requestAnimationFrame(frame);
+      } else {
+        vcDrawFrame(text, 1, anim, 1);
+        if (onDone) onDone();
+      }
+    }
+    vcAnimFrame = requestAnimationFrame(frame);
+  }
+
+  // ── Build background swatches ──
+  function vcBuildBgGrid() {
+    const grid = document.getElementById('vc-bg-grid');
+    grid.innerHTML = '';
+    vcBackgrounds.forEach((bg, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'vc-bg-swatch' + (i === 0 ? ' active' : '');
+      wrap.title = bg.label;
+      wrap.onclick = () => {
+        document.querySelectorAll('.vc-bg-swatch').forEach(s => s.classList.remove('active'));
+        wrap.classList.add('active');
+        vcSelectedBg = i;
+        vcPreview();
+      };
+      // Mini preview canvas
+      const mc = document.createElement('canvas');
+      mc.width = 54; mc.height = 96;
+      const mctx = mc.getContext('2d');
+      vcDrawBgMini(mctx, bg, 54, 96);
+      wrap.appendChild(mc);
+      grid.appendChild(wrap);
+    });
+  }
+
+  function vcDrawBgMini(ctx, bg, w, h) {
+    const grd = ctx.createLinearGradient(0, 0, w*0.3, h);
+    const cols = bg.colors;
+    grd.addColorStop(0,   cols[0]);
+    grd.addColorStop(0.5, cols[1]);
+    grd.addColorStop(1,   cols[2]);
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+    // label
+    ctx.save();
+    ctx.globalAlpha = 0.9;
+    ctx.font = 'bold 8px sans-serif';
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.fillText(bg.label, w/2, h - 6);
+    ctx.restore();
+  }
+
+  function vcSetAnim(btn) {
+    document.querySelectorAll('.vc-anim-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    vcSelectedAnim = btn.dataset.anim;
+  }
+
+  function vcSetDur(btn) {
+    document.querySelectorAll('.vc-dur-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    vcDuration = parseInt(btn.dataset.dur);
+  }
+
+  function vcOpenWithQuote(text) {
+    document.getElementById('vc-quote-text').value = text;
+    document.getElementById('video-creator').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => vcPreview(), 600);
+  }
+
+  function vcUseShuffled() {
+    const q = document.getElementById('shuffled-quote').textContent;
+    if (q && q !== 'Hit shuffle and discover your next perfect status update.') {
+      document.getElementById('vc-quote-text').value = q;
+      vcPreview();
+    } else {
+      alert('Shuffle a quote first, then use this button!');
+    }
+  }
+
+  function vcPreview() {
+    const text = document.getElementById('vc-quote-text').value.trim();
+    if (!text) { alert('Please enter a quote first!'); return; }
+    document.getElementById('vc-status').textContent = 'Previewing...';
+    vcAnimate(text, vcSelectedAnim, vcDuration, () => {
+      document.getElementById('vc-status').textContent = '✓ Preview complete — ready to download';
+    });
+  }
+
+  function vcRecord() {
+    const text = document.getElementById('vc-quote-text').value.trim();
+    if (!text) { alert('Please enter a quote first!'); return; }
+
+    if (!window.MediaRecorder) {
+      alert('Your browser does not support video recording. Please use Chrome or Edge.');
+      return;
+    }
+
+    const btn  = document.getElementById('vc-record-btn');
+    const prog = document.getElementById('vc-progress');
+    const bar  = document.getElementById('vc-progress-bar');
+    const badge = document.getElementById('vc-rec-badge');
+    const status = document.getElementById('vc-status');
+
+    btn.disabled = true;
+    btn.textContent = '● Recording...';
+    badge.style.display = 'block';
+    prog.style.display = 'block';
+    bar.style.width = '0%';
+    status.textContent = 'Recording video...';
+
+    const stream   = vcCanvas.captureStream(30);
+    const mimeType = MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4'
+                   : MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9'
+                   : 'video/webm';
+    const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 4000000 });
+    const chunks   = [];
+
+    recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+    recorder.onstop = () => {
+      const blob = new Blob(chunks, { type: mimeType });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'StatusShuffle_quote.' + (mimeType.includes('mp4') ? 'mp4' : 'webm');
+      a.click();
+      URL.revokeObjectURL(url);
+
+      btn.disabled = false;
+      btn.textContent = '⬇ Download Video';
+      badge.style.display = 'none';
+      status.textContent = '✓ Video downloaded!';
+      prog.style.display = 'none';
+    };
+
+    recorder.start();
+    const startTime = performance.now();
+    const totalMs   = vcDuration * 1000;
+
+    // Progress bar ticker
+    const progInterval = setInterval(() => {
+      const p = Math.min((performance.now() - startTime) / totalMs, 1);
+      bar.style.width = (p * 100) + '%';
+      if (p >= 1) clearInterval(progInterval);
+    }, 100);
+
+    // Run animation while recording
+    vcAnimate(text, vcSelectedAnim, vcDuration, () => {
+      setTimeout(() => {
+        recorder.stop();
+      }, 200);
+    });
+  }
+
+  // ── Init video creator ──
+  vcBuildBgGrid();
+  vcDrawFrame('Your quote will appear here', 1, 'fade', 1);
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
@@ -1670,6 +2646,270 @@
   window.addEventListener('appinstalled', () => {
     banner.classList.remove('visible');
   });
+
+  // ═══════════════════════════════════════
+  //  IMAGE CREATOR ENGINE
+  // ═══════════════════════════════════════
+
+  const bgPresets = [
+    { type: 'gradient', value: 'linear-gradient(135deg,#1a1814,#3d2b1f)', label: 'Dark Warm' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#c8622a,#f2a06e)', label: 'Terracotta' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)', label: 'Ocean' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#4a0e8f,#9b59b6)', label: 'Purple' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#134e5e,#71b280)', label: 'Forest' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#b92b27,#1565c0)', label: 'Fire & Ice' },
+    { type: 'solid', value: '#1a1814', label: 'Black' },
+    { type: 'solid', value: '#ffffff', label: 'White' },
+    { type: 'solid', value: '#f7f5f0', label: 'Cream' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#f093fb,#f5576c)', label: 'Pink Bliss' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#ffecd2,#fcb69f)', label: 'Peach' },
+    { type: 'gradient', value: 'linear-gradient(135deg,#a8edea,#fed6e3)', label: 'Pastel' },
+  ];
+
+  const fontStyles = [
+    { label: 'Playfair', css: "italic 42px 'Playfair Display', serif" },
+    { label: 'Bold Serif', css: "bold 42px 'Playfair Display', serif" },
+    { label: 'Sans', css: "400 42px 'DM Sans', sans-serif" },
+    { label: 'Bold Sans', css: "700 42px 'DM Sans', sans-serif" },
+    { label: 'Classic', css: "400 42px Georgia, serif" },
+  ];
+
+  const textColors = ['#ffffff','#f7f5f0','#1a1814','#c8622a','#f2a06e','#ffd700','#a8edea','#f093fb','#71b280'];
+
+  let creatorState = {
+    bgIndex: 0,
+    fontIndex: 0,
+    colorIndex: 0,
+    userBg: null,
+    size: 42,
+    watermark: true,
+  };
+
+  function initCreator() {
+    // Build bg swatches
+    const bpEl = document.getElementById('bg-presets');
+    bgPresets.forEach((bg, i) => {
+      const sw = document.createElement('div');
+      sw.className = 'bg-swatch' + (i === 0 ? ' active' : '');
+      sw.style.background = bg.value;
+      sw.title = bg.label;
+      sw.onclick = () => {
+        creatorState.bgIndex = i;
+        creatorState.userBg = null;
+        document.querySelectorAll('.bg-swatch').forEach(s => s.classList.remove('active'));
+        sw.classList.add('active');
+        renderCanvas();
+      };
+      bpEl.appendChild(sw);
+    });
+
+    // Build font pills
+    const fpEl = document.getElementById('font-pills');
+    fontStyles.forEach((f, i) => {
+      const pill = document.createElement('button');
+      pill.className = 'font-pill' + (i === 0 ? ' active' : '');
+      pill.textContent = f.label;
+      pill.style.fontFamily = f.css.includes('Playfair') ? "'Playfair Display',serif" : "'DM Sans',sans-serif";
+      pill.onclick = () => {
+        creatorState.fontIndex = i;
+        document.querySelectorAll('.font-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        renderCanvas();
+      };
+      fpEl.appendChild(pill);
+    });
+
+    // Build text color swatches
+    const tcEl = document.getElementById('text-colors');
+    textColors.forEach((col, i) => {
+      const sw = document.createElement('div');
+      sw.className = 'text-color-swatch' + (i === 0 ? ' active' : '');
+      sw.style.background = col;
+      sw.style.boxShadow = col === '#ffffff' ? '0 0 0 1px #ccc inset' : 'none';
+      sw.onclick = () => {
+        creatorState.colorIndex = i;
+        document.querySelectorAll('.text-color-swatch').forEach(s => s.classList.remove('active'));
+        sw.classList.add('active');
+        renderCanvas();
+      };
+      tcEl.appendChild(sw);
+    });
+
+    renderCanvas();
+  }
+
+  function renderCanvas() {
+    const canvas = document.getElementById('quote-canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1080, H = 1080;
+    canvas.width = W; canvas.height = H;
+
+    // Background
+    if (creatorState.userBg) {
+      ctx.drawImage(creatorState.userBg, 0, 0, W, H);
+      // Overlay for readability
+      ctx.fillStyle = 'rgba(0,0,0,0.35)';
+      ctx.fillRect(0, 0, W, H);
+    } else {
+      const bg = bgPresets[creatorState.bgIndex];
+      if (bg.type === 'solid') {
+        ctx.fillStyle = bg.value;
+        ctx.fillRect(0, 0, W, H);
+      } else {
+        // Parse gradient
+        const isLinear = bg.value.startsWith('linear-gradient');
+        const colorMatches = [...bg.value.matchAll(/#[0-9a-fA-F]{3,6}/g)].map(m => m[0]);
+        const grad = ctx.createLinearGradient(0, 0, W, H);
+        colorMatches.forEach((c, i) => grad.addColorStop(i / (colorMatches.length - 1), c));
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+      }
+    }
+
+    // Subtle inner glow border
+    const borderGrad = ctx.createRadialGradient(W/2,H/2,H*0.3,W/2,H/2,H*0.75);
+    borderGrad.addColorStop(0,'rgba(255,255,255,0)');
+    borderGrad.addColorStop(1,'rgba(0,0,0,0.25)');
+    ctx.fillStyle = borderGrad;
+    ctx.fillRect(0,0,W,H);
+
+    // Decorative quote mark
+    const textColor = textColors[creatorState.colorIndex];
+    ctx.fillStyle = textColor;
+    ctx.globalAlpha = 0.12;
+    ctx.font = "bold 320px 'Playfair Display', Georgia, serif";
+    ctx.fillText('"', 60, 380);
+    ctx.globalAlpha = 1;
+
+    // Quote text
+    const size = parseInt(document.getElementById('text-size')?.value || 42);
+    const baseFont = fontStyles[creatorState.fontIndex].css;
+    const fontWithSize = baseFont.replace(/\d+px/, size + 'px');
+    ctx.font = fontWithSize;
+    ctx.fillStyle = textColor;
+    ctx.textAlign = 'center';
+
+    // Word wrap
+    const text = document.getElementById('creator-text')?.value || '';
+    const maxWidth = W * 0.78;
+    const lineHeight = size * 1.55;
+    const words = text.split(' ');
+    let lines = [];
+    let current = '';
+    words.forEach(word => {
+      const test = current ? current + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && current) {
+        lines.push(current);
+        current = word;
+      } else {
+        current = test;
+      }
+    });
+    if (current) lines.push(current);
+
+    const totalH = lines.length * lineHeight;
+    let startY = (H - totalH) / 2 + size * 0.8;
+
+    // Text shadow
+    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    ctx.shadowBlur = 18;
+    ctx.shadowOffsetY = 4;
+    lines.forEach(line => {
+      ctx.fillText(line, W / 2, startY);
+      startY += lineHeight;
+    });
+    ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+
+    // Divider line
+    ctx.strokeStyle = textColor;
+    ctx.globalAlpha = 0.4;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    const divY = startY + 30;
+    ctx.moveTo(W * 0.35, divY);
+    ctx.lineTo(W * 0.65, divY);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // Watermark
+    if (document.getElementById('show-watermark')?.checked) {
+      ctx.font = "500 28px 'DM Sans', sans-serif";
+      ctx.fillStyle = textColor;
+      ctx.globalAlpha = 0.5;
+      ctx.textAlign = 'center';
+      ctx.fillText('✦ StatusShuffle', W / 2, H - 60);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function loadUserBg(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        creatorState.userBg = img;
+        document.querySelectorAll('.bg-swatch').forEach(s => s.classList.remove('active'));
+        renderCanvas();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function useCurrentQuote() {
+    const el = document.getElementById('shuffled-quote');
+    const text = el ? el.textContent : '';
+    if (text && text !== 'Hit shuffle and discover your next perfect status update.') {
+      document.getElementById('creator-text').value = text;
+      renderCanvas();
+      document.getElementById('image-creator').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      showToast('Shuffle a quote first!');
+    }
+  }
+
+  function downloadQuoteImage() {
+    renderCanvas();
+    const canvas = document.getElementById('quote-canvas');
+    const link = document.createElement('a');
+    link.download = 'StatusShuffle-quote.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('Image downloaded! ✓');
+  }
+
+  function shareCreatorImage(platform) {
+    renderCanvas();
+    const canvas = document.getElementById('quote-canvas');
+    const text = document.getElementById('creator-text')?.value || '';
+    const encoded = encodeURIComponent('"' + text + '" — via StatusShuffle');
+    const siteUrl = encodeURIComponent(window.location.href);
+
+    if (platform === 'twitter') {
+      window.open('https://twitter.com/intent/tweet?text=' + encoded, '_blank');
+    } else if (platform === 'facebook') {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + siteUrl, '_blank');
+    } else if (platform === 'whatsapp') {
+      window.open('https://wa.me/?text=' + encoded, '_blank');
+    } else {
+      // Instagram / TikTok: download image then open app
+      const link = document.createElement('a');
+      link.download = 'StatusShuffle-quote.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      setTimeout(() => {
+        const url = platform === 'instagram' ? 'https://www.instagram.com/' : 'https://www.tiktok.com/';
+        window.open(url, '_blank');
+        showToast('Image saved! Upload it to ' + (platform === 'instagram' ? 'Instagram' : 'TikTok') + ' ✓');
+      }, 600);
+    }
+  }
+
+  // Init creator on load
+  initCreator();
+
 </script>
 </body>
 </html>
