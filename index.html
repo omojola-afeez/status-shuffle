@@ -910,7 +910,7 @@
     @keyframes fadePanel { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Video panel gets dark bg */
-    #panel-video { background: #141e30; border-radius: 14px; padding: 1rem; margin-top: 0.4rem; }
+    #panel-video { background: #141e30; border-radius: 12px; padding: 0.8rem; margin-top: 0.3rem; }
 
     .creator-layout {
       display: grid;
@@ -1214,30 +1214,30 @@
     .videocreator-section .section-title { color: #fff; }
     .vc-layout {
       display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 1rem auto 0;
+      grid-template-columns: 200px 1fr;
+      gap: 1.2rem;
+      max-width: 860px;
+      margin: 0.8rem auto 0;
       align-items: start;
     }
-    @media(max-width:860px){ .vc-layout { grid-template-columns: 1fr; } }
+    @media(max-width:700px){ .vc-layout { grid-template-columns: 1fr; } }
 
     /* Preview canvas wrapper */
     .vc-preview-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
+      gap: 0.6rem;
     }
     .vc-canvas-container {
       position: relative;
-      width: 100%;
-      max-width: 200px;
-      aspect-ratio: 9/16;
-      border-radius: 14px;
+      width: 200px;
+      height: 355px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
       background: #111;
+      flex-shrink: 0;
     }
     #vc-canvas {
       width: 100%;
@@ -1260,15 +1260,15 @@
     @keyframes pulse-rec { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* Controls panel */
-    .vc-controls { display: flex; flex-direction: column; gap: 0.9rem; }
+    .vc-controls { display: flex; flex-direction: column; gap: 0.7rem; }
     .vc-group label {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.5);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
     }
     .vc-quote-input {
       width: 100%;
@@ -1279,7 +1279,7 @@
       font-size: 0.95rem;
       padding: 0.75rem 1rem;
       resize: vertical;
-      min-height: 60px;
+      min-height: 48px;
       font-family: inherit;
       transition: border 0.2s;
     }
@@ -1287,7 +1287,7 @@
     .vc-bg-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0.35rem;
+      gap: 0.25rem;
     }
     .vc-bg-swatch {
       aspect-ratio: 9/16;
@@ -2678,45 +2678,88 @@
 
   // ── AI Mood Quote Generator ──
   let moodQuoteText = '';
-  async function generateMoodQuote() {
-    const input = document.getElementById('mood-gen-input').value.trim();
+  function generateMoodQuote() {
+    const input = document.getElementById('mood-gen-input').value.trim().toLowerCase();
     if (!input) { document.getElementById('mood-gen-input').focus(); return; }
 
     const btn = document.getElementById('mood-gen-btn');
     const result = document.getElementById('mood-gen-result');
     btn.disabled = true;
-    btn.textContent = '✦ Generating…';
+    btn.textContent = '✦ Finding…';
     result.style.display = 'none';
 
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 200,
-          messages: [{
-            role: 'user',
-            content: `Write a single short, powerful quote (max 20 words) perfectly matching this mood or feeling: "${input}". 
-Reply with ONLY the quote text — no quotation marks, no attribution, no explanation.`
-          }]
-        })
-      });
-      const data = await res.json();
-      const quote = data.content?.[0]?.text?.trim() || '';
-      if (quote) {
-        moodQuoteText = quote;
-        document.getElementById('mood-gen-quote').textContent = '"' + quote + '"';
-        result.style.display = 'block';
-      } else {
-        btn.textContent = '✦ Try again';
+    // Keyword → category mapping
+    const moodMap = [
+      { words: ['funny','laugh','humor','joke','silly','lol','meme','hilarious','comic'], cats: ['funny','memes','crazy'] },
+      { words: ['love','romantic','crush','heart','relationship','miss','girlfriend','boyfriend','couple'], cats: ['romantic','heartbreak'] },
+      { words: ['sad','heartbreak','hurt','cry','broken','pain','grief','lonely','alone','miss'], cats: ['heartbreak','life','night'] },
+      { words: ['motivat','inspir','goal','dream','hustle','grind','success','achieve','win','push'], cats: ['motivational','success','boss','inspirational'] },
+      { words: ['boss','leader','ceo','powerful','unstoppable','strong','dominant'], cats: ['boss','success','attitude'] },
+      { words: ['attitude','savage','unbothered','vibe','confidence','bold','fierce'], cats: ['attitude','boss'] },
+      { words: ['friend','bestie','squad','friendship','loyal','crew','brother','sister'], cats: ['friendship'] },
+      { words: ['life','journey','purpose','meaning','exist','grow','change'], cats: ['life','inspirational'] },
+      { words: ['angry','mad','frustrat','annoyed','upset','rage','furious'], cats: ['angry','memes'] },
+      { words: ['crazy','wild','random','chaos','weird','unhinged'], cats: ['crazy','memes'] },
+      { words: ['friday','weekend','tgif','party','celebrate','free'], cats: ['tgif'] },
+      { words: ['mom','mother','mum','parent'], cats: ['mothers'] },
+      { words: ['birthday','born','celebrate','age','older'], cats: ['birthday'] },
+      { words: ['morning','wake','sunrise','fresh','start'], cats: ['morning'] },
+      { words: ['night','sleep','late','dark','moon','dream'], cats: ['night'] },
+      { words: ['monday','week','work','office','job','tired','dread'], cats: ['monday'] },
+      { words: ['travel','adventure','explore','trip','journey','wander'], cats: ['travel'] },
+      { words: ['food','eat','hungry','snack','cook','meal','restaurant'], cats: ['food'] },
+      { words: ['gym','workout','fit','exercise','health','body','run'], cats: ['workout','health'] },
+      { words: ['christmas','holiday','festive','santa','december'], cats: ['christmas'] },
+      { words: ['new year','resolution','fresh start','2025','2026'], cats: ['newyear'] },
+      { words: ['grateful','thankful','bless','appreciate','gratitude'], cats: ['grateful'] },
+      { words: ['money','finance','wealth','invest','save','rich','broke'], cats: ['finance'] },
+      { words: ['animal','pet','dog','cat','nature','wildlife'], cats: ['animals','nature'] },
+      { words: ['health','wellness','mental','self care','selfcare','heal','rest'], cats: ['selfcare','health'] },
+      { words: ['rain','rainy','wet','storm','weather'], cats: ['rain','cold'] },
+      { words: ['cold','winter','harmattan','chill','freeze'], cats: ['cold','harmattan'] },
+      { words: ['politic','vote','government','leader','country'], cats: ['politics'] },
+      { words: ['fact','learn','science','knowledge','curious'], cats: ['funfacts'] },
+      { words: ['self care','selfcare','me time','peace','calm','relax'], cats: ['selfcare'] },
+    ];
+
+    // Find best matching categories
+    let matchedCats = [];
+    for (const m of moodMap) {
+      if (m.words.some(w => input.includes(w))) {
+        matchedCats.push(...m.cats);
       }
-    } catch(e) {
-      document.getElementById('mood-gen-quote').textContent = 'Could not generate — please try again.';
-      result.style.display = 'block';
     }
-    btn.disabled = false;
-    btn.textContent = '✦ Generate Quote';
+
+    // Remove duplicates
+    matchedCats = [...new Set(matchedCats)];
+
+    // Build pool from matched categories, fallback to all
+    let pool = matchedCats.length > 0
+      ? quotes.filter(q => matchedCats.includes(q.cat))
+      : quotes;
+
+    // Further filter by exact word matches in quote text
+    const words = input.split(/\s+/).filter(w => w.length > 3);
+    const refined = words.length > 0
+      ? pool.filter(q => words.some(w => q.text.toLowerCase().includes(w)))
+      : [];
+
+    const finalPool = refined.length > 0 ? refined : pool;
+
+    // Pick a random quote from the pool
+    setTimeout(() => {
+      if (finalPool.length === 0) {
+        const fallback = quotes[Math.floor(Math.random() * quotes.length)];
+        moodQuoteText = fallback.text;
+      } else {
+        const pick = finalPool[Math.floor(Math.random() * finalPool.length)];
+        moodQuoteText = pick.text;
+      }
+      document.getElementById('mood-gen-quote').textContent = '"' + moodQuoteText + '"';
+      result.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = '✦ Generate Quote';
+    }, 600);
   }
 
   function useMoodQuote() {
