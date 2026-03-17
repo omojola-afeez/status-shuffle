@@ -295,7 +295,32 @@
       text-transform: uppercase;
       color: var(--accent);
     }
-    .shuffle-controls { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .shuffle-controls {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media(max-width:600px) {
+      .shuffle-controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+        padding: 0 0.5rem;
+      }
+      .filter-btn {
+        font-size: 0.72rem !important;
+        padding: 0.45rem 0.5rem !important;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
     .filter-btn {
       padding: 0.5rem 1.2rem;
       border-radius: 100px;
@@ -731,9 +756,14 @@
     .tag-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
       max-width: 1100px;
       margin: 0 auto;
+      justify-content: center;
+    }
+    @media(max-width:600px) {
+      .tag-cloud { gap: 0.35rem; }
+      .topic-tag { font-size: 0.75rem !important; padding: 0.28rem 0.7rem !important; }
     }
     .topic-tag {
       padding: 0.35rem 0.9rem;
@@ -1069,6 +1099,111 @@
     }
 
   
+    /* ── AI MOOD GENERATOR ── */
+    .mood-gen-box {
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+    }
+    .mood-gen-inner {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .mood-gen-input {
+      flex: 1;
+      min-width: 200px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      color: #fff;
+      font-size: 0.88rem;
+      padding: 0.6rem 1.1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .mood-gen-input::placeholder { color: rgba(255,255,255,0.35); }
+    .mood-gen-input:focus { border-color: var(--accent); }
+    .mood-gen-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .mood-gen-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .mood-gen-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .mood-gen-result {
+      margin-top: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.9rem;
+    }
+    .mood-gen-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: #fff;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 0.7rem;
+    }
+    .mood-gen-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .mood-gen-use {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .mood-gen-copy {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    @media(max-width:600px) {
+      .mood-gen-inner { flex-direction: column; }
+      .mood-gen-btn { width: 100%; text-align: center; }
+    }
+
+    /* ── AI AUDIO TOGGLE ── */
+    .vc-audio-row { display: flex; gap: 0.4rem; }
+    .vc-audio-btn {
+      flex: 1;
+      padding: 0.4rem 0.7rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .vc-audio-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
     /* ── VIDEO CREATOR ── */
     .videocreator-section {
       padding: 5rem 2rem;
@@ -1431,6 +1566,21 @@
     <button class="filter-btn" data-filter="inspirational" onclick="setFilter('inspirational')">✨ Inspirational</button>
   </div>
 
+  <!-- AI MOOD GENERATOR -->
+  <div class="mood-gen-box">
+    <div class="mood-gen-inner">
+      <input class="mood-gen-input" id="mood-gen-input" type="text" placeholder="Describe your mood… e.g. 'feeling unstoppable today' or 'missing someone far away'" maxlength="150" />
+      <button class="mood-gen-btn" id="mood-gen-btn" onclick="generateMoodQuote()">✦ Generate Quote</button>
+    </div>
+    <div class="mood-gen-result" id="mood-gen-result" style="display:none;">
+      <div class="mood-gen-quote" id="mood-gen-quote"></div>
+      <div class="mood-gen-actions">
+        <button class="mood-gen-use" onclick="useMoodQuote()">Use this quote ↓</button>
+        <button class="mood-gen-copy" onclick="copyMoodQuote()">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+
   <div class="quote-display">
     <div class="quote-mark">"</div>
     <div id="shuffled-quote">Hit shuffle and discover your next perfect status update.</div>
@@ -1594,6 +1744,16 @@
             <button class="vc-dur-btn" data-dur="15" onclick="vcSetDur(this)">15s</button>
           </div>
         </div>
+        <!-- AI Audio -->
+        <div class="vc-group">
+          <label>🔊 AI Voiceover</label>
+          <div class="vc-audio-row">
+            <button class="vc-audio-btn active" id="audio-off" onclick="vcSetAudio(false,this)">Off</button>
+            <button class="vc-audio-btn" id="audio-on" onclick="vcSetAudio(true,this)">On — Read quote aloud</button>
+          </div>
+          <div id="vc-audio-status" style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:0.3rem;display:none;">Uses your device's built-in text-to-speech</div>
+        </div>
+
         <div class="vc-action-row">
           <button class="vc-btn-preview" onclick="vcPreview()">▶ Preview</button>
           <button class="vc-btn-record" id="vc-record-btn" onclick="vcRecord()">⬇ Download Video</button>
@@ -2516,6 +2676,94 @@
     }
   }
 
+  // ── AI Mood Quote Generator ──
+  let moodQuoteText = '';
+  async function generateMoodQuote() {
+    const input = document.getElementById('mood-gen-input').value.trim();
+    if (!input) { document.getElementById('mood-gen-input').focus(); return; }
+
+    const btn = document.getElementById('mood-gen-btn');
+    const result = document.getElementById('mood-gen-result');
+    btn.disabled = true;
+    btn.textContent = '✦ Generating…';
+    result.style.display = 'none';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 200,
+          messages: [{
+            role: 'user',
+            content: `Write a single short, powerful quote (max 20 words) perfectly matching this mood or feeling: "${input}". 
+Reply with ONLY the quote text — no quotation marks, no attribution, no explanation.`
+          }]
+        })
+      });
+      const data = await res.json();
+      const quote = data.content?.[0]?.text?.trim() || '';
+      if (quote) {
+        moodQuoteText = quote;
+        document.getElementById('mood-gen-quote').textContent = '"' + quote + '"';
+        result.style.display = 'block';
+      } else {
+        btn.textContent = '✦ Try again';
+      }
+    } catch(e) {
+      document.getElementById('mood-gen-quote').textContent = 'Could not generate — please try again.';
+      result.style.display = 'block';
+    }
+    btn.disabled = false;
+    btn.textContent = '✦ Generate Quote';
+  }
+
+  function useMoodQuote() {
+    if (!moodQuoteText) return;
+    const el = document.getElementById('shuffled-quote');
+    el.style.opacity = 0;
+    setTimeout(() => { el.textContent = moodQuoteText; el.style.opacity = 1; }, 200);
+    document.getElementById('shuffle').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function copyMoodQuote() {
+    if (!moodQuoteText) return;
+    navigator.clipboard.writeText('"' + moodQuoteText + '"').then(() => showToast('✓ Copied!'));
+  }
+
+  // Allow Enter key to trigger generation
+  document.addEventListener('DOMContentLoaded', () => {
+    const inp = document.getElementById('mood-gen-input');
+    if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') generateMoodQuote(); });
+  });
+
+  // ── AI Audio for Video ──
+  let vcAudioEnabled = false;
+  function vcSetAudio(on, btn) {
+    vcAudioEnabled = on;
+    document.querySelectorAll('.vc-audio-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const status = document.getElementById('vc-audio-status');
+    status.style.display = on ? 'block' : 'none';
+  }
+
+  function vcSpeakQuote(text, duration, callback) {
+    if (!vcAudioEnabled || !window.speechSynthesis) { callback(); return; }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.85;
+    utter.pitch = 1;
+    utter.volume = 1;
+    // Pick a pleasant voice if available
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google UK') || v.name.includes('Karen') || v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en'));
+    if (preferred) utter.voice = preferred;
+    utter.onend = callback;
+    utter.onerror = callback;
+    window.speechSynthesis.speak(utter);
+  }
+
   // ── Creator Tab Switch ──
   function switchCreatorTab(tab) {
     document.getElementById('panel-image').style.display = tab === 'image' ? '' : 'none';
@@ -2867,6 +3115,7 @@
     const text = document.getElementById('vc-quote-text').value.trim();
     if (!text) { alert('Please enter a quote first!'); return; }
     document.getElementById('vc-status').textContent = 'Previewing...';
+    vcSpeakQuote(text, vcDuration, () => {});
     vcAnimate(text, vcSelectedAnim, vcDuration, () => {
       document.getElementById('vc-status').textContent = '✓ Preview complete — ready to download';
     });
