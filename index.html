@@ -211,37 +211,37 @@
 
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
     }
     .category-card {
-      border-radius: 20px;
-      padding: 2rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s;
+      transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
     }
-    .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
+    .category-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
     .category-card.funny { background: var(--funny-bg); }
     .category-card.romantic { background: var(--romantic-bg); }
     .category-card.motivational { background: var(--motivational-bg); }
-    .cat-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .cat-icon { font-size: 1.4rem; margin-bottom: 0; flex-shrink: 0; }
+    .cat-body { flex: 1; min-width: 0; }
     .cat-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .cat-count { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
-    .cat-preview {
-      font-size: 0.875rem;
-      line-height: 1.6;
-      color: var(--ink);
-      font-style: italic;
-      border-left: 3px solid;
-      padding-left: 0.8rem;
-    }
+    .cat-count { font-size: 0.7rem; color: var(--muted); margin-bottom: 0; }
+    .cat-preview { display: none; }
     .funny .cat-preview { border-color: var(--funny); }
     .romantic .cat-preview { border-color: var(--romantic); }
     .motivational .cat-preview { border-color: var(--motivational); }
@@ -829,7 +829,7 @@
       .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
       .hero-visual { display: none; }
       .section { padding: 3rem 1.5rem; }
-      .categories-grid { grid-template-columns: 1fr 1fr !important; }
+      .categories-grid { grid-template-columns: 1fr 1fr; }
       .stats { gap: 2rem; padding: 1.5rem; flex-wrap: wrap; }
       .shuffle-section { padding: 3rem 1.5rem; }
       .sf-top { flex-direction: column; text-align: center; }
@@ -1331,54 +1331,54 @@
     <p class="section-eyebrow">Browse by Mood</p>
     <h2 class="section-title">Find your vibe</h2>
   </div>
-  <div class="categories-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="categories-grid">
     <div class="category-card funny" onclick="setFilter('funny'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">😂</div>
-      <div class="cat-title">Funny & Witty</div>
+      <div class="cat-body"><div class="cat-title">Funny & Witty</div>
       <div class="cat-count">20+ quotes</div>
-      <div class="cat-preview">"My bed is always extra comfortable in the morning when it's time to get up."</div>
+      </div><div class="cat-preview">"My bed is always extra comfortable in the morning when it's time to get up."</div>
     </div>
     <div class="category-card romantic" onclick="setFilter('romantic'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">💕</div>
-      <div class="cat-title">Romantic & Cute</div>
+      <div class="cat-body"><div class="cat-title">Romantic & Cute</div>
       <div class="cat-count">20+ quotes</div>
-      <div class="cat-preview">"Be the reason someone believes in good people."</div>
+      </div><div class="cat-preview">"Be the reason someone believes in good people."</div>
     </div>
     <div class="category-card motivational" onclick="setFilter('motivational'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">⚡</div>
-      <div class="cat-title">Motivational</div>
+      <div class="cat-body"><div class="cat-title">Motivational</div>
       <div class="cat-count">20+ quotes</div>
-      <div class="cat-preview">"Keep calm & just chill. You've got this."</div>
+      </div><div class="cat-preview">"Keep calm & just chill. You've got this."</div>
     </div>
     <div class="category-card" style="background:#f0f3ff;" onclick="setFilter('attitude'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">😎</div>
-      <div class="cat-title">Attitude</div>
+      <div class="cat-body"><div class="cat-title">Attitude</div>
       <div class="cat-count">15+ quotes</div>
-      <div class="cat-preview" style="border-color:#5c6bc0;">"Know your worth. Then add tax."</div>
+      </div><div class="cat-preview" style="border-color:#5c6bc0;">"Know your worth. Then add tax."</div>
     </div>
     <div class="category-card" style="background:#f3fff0;" onclick="setFilter('friendship'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">🤝</div>
-      <div class="cat-title">Friendship</div>
+      <div class="cat-body"><div class="cat-title">Friendship</div>
       <div class="cat-count">15+ quotes</div>
-      <div class="cat-preview" style="border-color:#43a047;">"Friends are the family we choose for ourselves."</div>
+      </div><div class="cat-preview" style="border-color:#43a047;">"Friends are the family we choose for ourselves."</div>
     </div>
     <div class="category-card" style="background:#f5fff8;" onclick="setFilter('life'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">🌿</div>
-      <div class="cat-title">Life</div>
+      <div class="cat-body"><div class="cat-title">Life</div>
       <div class="cat-count">15+ quotes</div>
-      <div class="cat-preview" style="border-color:#26a69a;">"Collect moments, not things."</div>
+      </div><div class="cat-preview" style="border-color:#26a69a;">"Collect moments, not things."</div>
     </div>
     <div class="category-card" style="background:#fff5f0;" onclick="setFilter('angry'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">🔥</div>
-      <div class="cat-title">Angry</div>
+      <div class="cat-body"><div class="cat-title">Angry</div>
       <div class="cat-count">12+ quotes</div>
-      <div class="cat-preview" style="border-color:#ef5350;">"My patience has limits. Tread carefully."</div>
+      </div><div class="cat-preview" style="border-color:#ef5350;">"My patience has limits. Tread carefully."</div>
     </div>
     <div class="category-card" style="background:#fdf5ff;" onclick="setFilter('crazy'); document.getElementById('shuffle').scrollIntoView({behavior:'smooth'})">
       <div class="cat-icon">🤪</div>
-      <div class="cat-title">Crazy & Random</div>
+      <div class="cat-body"><div class="cat-title">Crazy & Random</div>
       <div class="cat-count">12+ quotes</div>
-      <div class="cat-preview" style="border-color:#ab47bc;">"I'm not weird. Weird is a side effect of being awesome."</div>
+      </div><div class="cat-preview" style="border-color:#ab47bc;">"I'm not weird. Weird is a side effect of being awesome."</div>
     </div>
   </div>
 </section>
