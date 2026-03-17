@@ -1187,7 +1187,7 @@
     .vc-audio-row { display: flex; gap: 0.4rem; }
     .vc-audio-btn {
       flex: 1;
-      padding: 0.4rem 0.7rem;
+      padding: 0.3rem 0.5rem;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.15);
       background: transparent;
@@ -1214,10 +1214,10 @@
     .videocreator-section .section-title { color: #fff; }
     .vc-layout {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 1.2rem;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
       max-width: 860px;
-      margin: 0.8rem auto 0;
+      margin: 0.5rem auto 0;
       align-items: start;
     }
     @media(max-width:700px){ .vc-layout { grid-template-columns: 1fr; } }
@@ -1227,15 +1227,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.35rem;
     }
     .vc-canvas-container {
       position: relative;
-      width: 200px;
-      height: 355px;
-      border-radius: 12px;
+      width: 130px;
+      height: 230px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
       background: #111;
       flex-shrink: 0;
     }
@@ -1260,7 +1260,7 @@
     @keyframes pulse-rec { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* Controls panel */
-    .vc-controls { display: flex; flex-direction: column; gap: 0.7rem; }
+    .vc-controls { display: flex; flex-direction: column; gap: 0.5rem; }
     .vc-group label {
       display: block;
       font-size: 0.68rem;
@@ -1279,15 +1279,15 @@
       font-size: 0.95rem;
       padding: 0.75rem 1rem;
       resize: vertical;
-      min-height: 48px;
+      min-height: 38px;
       font-family: inherit;
       transition: border 0.2s;
     }
     .vc-quote-input:focus { outline: none; border-color: var(--accent); }
     .vc-bg-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.25rem;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.2rem;
     }
     .vc-bg-swatch {
       aspect-ratio: 9/16;
@@ -1336,7 +1336,7 @@
       font-family: inherit;
     }
     .vc-dur-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .vc-action-row { display: flex; flex-direction: column; gap: 0.75rem; }
+    .vc-action-row { display: flex; flex-direction: row; gap: 0.5rem; }
     .vc-btn-preview {
       width: 100%;
       padding: 0.85rem;
@@ -1404,6 +1404,8 @@
       text-align: center;
     }
     .vc-use-shuffled {
+      font-size: 0.75rem !important;
+      padding: 0.25rem 0 !important;
       font-size: 0.78rem;
       color: var(--accent);
       background: none;
@@ -1713,7 +1715,7 @@
           <canvas id="vc-canvas" width="540" height="960"></canvas>
           <div class="vc-recording-badge" id="vc-rec-badge">● REC</div>
         </div>
-        <p class="vc-status" id="vc-status">Choose a background and hit Preview</p>
+        <p class="vc-status" id="vc-status" style="font-size:0.7rem;margin:0;">Choose a bg and preview</p>
         <div class="vc-progress" id="vc-progress"><div class="vc-progress-bar" id="vc-progress-bar"></div></div>
       </div>
       <div class="vc-controls">
@@ -1726,22 +1728,24 @@
           <label>Background</label>
           <div class="vc-bg-grid" id="vc-bg-grid"></div>
         </div>
-        <div class="vc-group">
-          <label>Text Animation</label>
-          <div class="vc-anim-grid">
-            <button class="vc-anim-btn active" data-anim="fade" onclick="vcSetAnim(this)">✦ Fade In</button>
-            <button class="vc-anim-btn" data-anim="typewriter" onclick="vcSetAnim(this)">⌨ Typewriter</button>
-            <button class="vc-anim-btn" data-anim="slide" onclick="vcSetAnim(this)">↑ Slide Up</button>
-            <button class="vc-anim-btn" data-anim="zoom" onclick="vcSetAnim(this)">⊕ Zoom In</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+          <div class="vc-group">
+            <label>Animation</label>
+            <div class="vc-anim-grid" style="grid-template-columns:1fr 1fr;">
+              <button class="vc-anim-btn active" data-anim="fade" onclick="vcSetAnim(this)">✦ Fade</button>
+              <button class="vc-anim-btn" data-anim="typewriter" onclick="vcSetAnim(this)">⌨ Type</button>
+              <button class="vc-anim-btn" data-anim="slide" onclick="vcSetAnim(this)">↑ Slide</button>
+              <button class="vc-anim-btn" data-anim="zoom" onclick="vcSetAnim(this)">⊕ Zoom</button>
+            </div>
           </div>
-        </div>
-        <div class="vc-group">
-          <label>Video Duration</label>
-          <div class="vc-duration-row">
-            <button class="vc-dur-btn active" data-dur="5" onclick="vcSetDur(this)">5s</button>
-            <button class="vc-dur-btn" data-dur="8" onclick="vcSetDur(this)">8s</button>
-            <button class="vc-dur-btn" data-dur="10" onclick="vcSetDur(this)">10s</button>
-            <button class="vc-dur-btn" data-dur="15" onclick="vcSetDur(this)">15s</button>
+          <div class="vc-group">
+            <label>Duration</label>
+            <div class="vc-duration-row" style="flex-wrap:wrap;">
+              <button class="vc-dur-btn active" data-dur="5" onclick="vcSetDur(this)">5s</button>
+              <button class="vc-dur-btn" data-dur="8" onclick="vcSetDur(this)">8s</button>
+              <button class="vc-dur-btn" data-dur="10" onclick="vcSetDur(this)">10s</button>
+              <button class="vc-dur-btn" data-dur="15" onclick="vcSetDur(this)">15s</button>
+            </div>
           </div>
         </div>
         <!-- AI Audio -->
